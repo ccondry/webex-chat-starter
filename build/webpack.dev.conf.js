@@ -32,7 +32,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      title: 'dCloud Toolbox - PCCE Instant',
+      title: 'dCloud Collaboration Toolbox',
       template: 'index.html',
       inject: true,
       favicon: 'client/assets/logo.png'
