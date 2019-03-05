@@ -18,7 +18,7 @@
                 <a href="/uccx">UCCX Instant Demo Toolbox</a>
               </li> -->
               <li>
-                <a href="/verticals">Vertical Configuration</a>
+                <a href="/verticals">Vertical Editor</a>
               </li>
             </ul>
           </div>
