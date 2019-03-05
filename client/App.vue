@@ -8,9 +8,9 @@
           <h1 class="title">dCloud Collaboration Toolbox</h1>
           <div class="content">
             <ul>
-              <!-- <li>
-                <a href="/brand">Brand Configuration Toolbox</a>
-              </li> -->
+              <li>
+                <a href="/brand">Brand Editor</a>
+              </li>
               <li>
                 <a href="/pcce">PCCE Instant Demo</a>
               </li>
