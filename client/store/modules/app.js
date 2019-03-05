@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import axios from 'axios'
 
 const getters = {
 }
@@ -50,27 +51,36 @@ const actions = {
     // if we found a token
     if (jwt !== null) {
       console.log('JWT login token found in localStorage')
+      // check JWT with API
       try {
-        const encodedPayload = jwt.split('.')[1]
-        console.log('encoded payload =', encodedPayload)
-        // parse payload out of JWT
-        const payload = JSON.parse(window.atob(encodedPayload))
-        console.log('JWT decoded and parsed. payload =', payload)
-        // check expiry
-        if (payload.exp <= Date.now()) {
-          console.log('payload.exp =', payload.exp)
-          console.log('Date.now() =', Date.now())
-          console.log('JWT expired. forwarding to login page')
-          // expired - forward to login page
-          window.location = '/auth/login?destination=' + window.location
-        }
+        await axios.get('/api/v1/auth/check', {headers: {Authorization: 'Bearer ' + jwt}})
       } catch (e) {
-        console.log('failed to parse JWT:', e)
         // invalid JWT? - forward to login page (if this is production)
         if (process.env.NODE_ENV === 'production') {
           window.location = '/auth/login?destination=' + window.location
         }
       }
+      // try {
+      //   const encodedPayload = jwt.split('.')[1]
+      //   console.log('encoded payload =', encodedPayload)
+      //   // parse payload out of JWT
+      //   const payload = JSON.parse(window.atob(encodedPayload))
+      //   console.log('JWT decoded and parsed. payload =', payload)
+      //   // check expiry
+      //   if (payload.exp <= Date.now()) {
+      //     console.log('payload.exp =', payload.exp)
+      //     console.log('Date.now() =', Date.now())
+      //     console.log('JWT expired. forwarding to login page')
+      //     // expired - forward to login page
+      //     window.location = '/auth/login?destination=' + window.location
+      //   }
+      // } catch (e) {
+      //   console.log('failed to parse JWT:', e)
+      //   // invalid JWT? - forward to login page (if this is production)
+      //   if (process.env.NODE_ENV === 'production') {
+      //     window.location = '/auth/login?destination=' + window.location
+      //   }
+      // }
     } else {
       // no JWT in localStorage
       console.log('JWT not found in localstorage.')
