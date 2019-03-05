@@ -51,8 +51,11 @@ const actions = {
     if (jwt !== null) {
       console.log('JWT login token found in localStorage')
       try {
+        const encodedPayload = jwt.split('.')[1]
+        console.log('encoded payload =', encodedPayload)
         // parse payload out of JWT
-        const payload = JSON.parse(window.atob(jwt.split('.')[1]))
+        const payload = JSON.parse(window.atob(encodedPayload))
+        console.log('JWT decoded and parsed. payload =', payload)
         // check expiry
         if (payload.exp <= Date.now()) {
           console.log('JWT expired. forwarding to login page')
