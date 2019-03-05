@@ -58,6 +58,8 @@ const actions = {
         console.log('JWT decoded and parsed. payload =', payload)
         // check expiry
         if (payload.exp <= Date.now()) {
+          console.log('payload.exp =', payload.exp)
+          console.log('Date.now() =', Date.now())
           console.log('JWT expired. forwarding to login page')
           // expired - forward to login page
           window.location = '/auth/login?destination=' + window.location
