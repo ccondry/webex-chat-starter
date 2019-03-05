@@ -59,7 +59,7 @@ const actions = {
           window.location = '/auth/login?destination=' + window.location
         }
       } catch (e) {
-        // probably expired -  forward to login page
+        // invalid JWT? - forward to login page
         window.location = '/auth/login?destination=' + window.location
       }
     } else {
