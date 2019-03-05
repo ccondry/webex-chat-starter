@@ -28,6 +28,20 @@
   </div>
 </template>
 
+<script>
+import {mapActions} from 'vuex'
+
+export default {
+  methods: {
+    ...mapActions(['checkLogin'])
+  },
+
+  beforeMount () {
+    this.checkLogin()
+  }
+}
+</script>
+
 <style lang="scss">
 
 html {

@@ -43,6 +43,29 @@ const mutations = {
 }
 
 const actions = {
+  async checkLogin ({getters, dispatch, commit, rootState}) {
+    console.log('checking localstorage for JWT login token')
+    // retrieve auth token from localStorage
+    const jwt = window.localStorage.getItem('jwt')
+    // if we found a token
+    if (jwt !== null) {
+      console.log('JWT login token found in localStorage')
+      // parse payload out of JWT
+      const payload = JSON.parse(window.atob(jwt.split('.')[1]))
+      // check expiry
+      if (payload.exp <= Date.now()) {
+        // expired - forward to login page
+        window.location = '/auth/login?destination=' + window.location
+      }
+    } else {
+      // no JWT in localStorage
+      console.log('JWT not found in localstorage.')
+      // forward user to login page, if this is running in production
+      if (process.env.NODE_ENV === 'production') {
+        window.location = '/auth/login?destination=' + window.location
+      }
+    }
+  }
 }
 
 export default {
