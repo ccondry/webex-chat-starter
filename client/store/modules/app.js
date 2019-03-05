@@ -55,12 +55,16 @@ const actions = {
         const payload = JSON.parse(window.atob(jwt.split('.')[1]))
         // check expiry
         if (payload.exp <= Date.now()) {
+          console.log('JWT expired. forwarding to login page')
           // expired - forward to login page
           window.location = '/auth/login?destination=' + window.location
         }
       } catch (e) {
-        // invalid JWT? - forward to login page
-        window.location = '/auth/login?destination=' + window.location
+        console.log('failed to parse JWT:', e)
+        // invalid JWT? - forward to login page (if this is production)
+        if (process.env.NODE_ENV === 'production') {
+          window.location = '/auth/login?destination=' + window.location
+        }
       }
     } else {
       // no JWT in localStorage
