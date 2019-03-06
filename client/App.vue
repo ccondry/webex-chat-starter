@@ -8,9 +8,9 @@
           <h1 class="title">dCloud Collaboration Toolbox</h1>
           <div class="content">
             <ul>
-              <li>
+              <!-- <li>
                 <a href="/brand">Brand Editor</a>
-              </li>
+              </li> -->
               <li>
                 <a href="/pcce">PCCE Instant Demo</a>
               </li>
@@ -18,7 +18,7 @@
                 <a href="/uccx">UCCX Instant Demo Toolbox</a>
               </li> -->
               <li>
-                <a href="/verticals">Vertical Editor</a>
+                <a href="/verticals">Demo Branding</a>
               </li>
             </ul>
           </div>
