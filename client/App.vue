@@ -15,7 +15,7 @@
                 <a href="/uccx">UCCX Instant Demo Toolbox</a>
               </li> -->
               <li>
-                <a href="/verticals">Demo Branding</a>
+                <a href="/branding">Demo Branding</a>
               </li>
             </ul>
           </div>
