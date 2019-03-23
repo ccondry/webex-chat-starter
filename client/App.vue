@@ -17,6 +17,9 @@
               <li>
                 <a href="/branding">Demo Branding</a>
               </li>
+              <li>
+                <a href="/chat">Chat Entry Points</a>
+              </li>
             </ul>
           </div>
         </article>
