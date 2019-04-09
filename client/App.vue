@@ -20,6 +20,9 @@
               <li>
                 <a href="/chat">Chat Entry Points</a>
               </li>
+              <li>
+                <a href="/cjp-ccone">CJP CCOne Demo</a>
+              </li>
             </ul>
           </div>
         </article>
