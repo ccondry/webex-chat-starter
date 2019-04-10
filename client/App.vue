@@ -18,7 +18,7 @@
                 <a href="/branding">Demo Branding</a>
               </li>
               <li>
-                <a href="/chat">Chat Entry Points</a>
+                <a href="/chat">Facebook &amp; SMS Entry Points</a>
               </li>
               <li>
                 <a href="/cjp-ccone">CJP CCOne Demo</a>
