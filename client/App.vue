@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-4">
+      <div class="tile is-parent is-3">
       </div>
-      <div class="tile is-parent is-4">
+      <div class="tile is-parent is-6">
         <article class="tile is-child box">
           <h1 class="title">dCloud Collaboration Toolbox</h1>
           <div class="content">
