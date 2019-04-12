@@ -24,6 +24,15 @@
                 <a href="/cjp-ccone">CJP CCOne Demo</a>
               </li>
             </ul>
+            <!-- Admin pages -->
+            <ul v-if="user.admin">
+              <li>
+                <a href="/uccx">UCCX Instant Demo (in development)</a>
+              </li>
+              <li>
+                <a href="/rcdn">RCDN (Compete Lab) Demos (in development)</a>
+              </li>
+            </ul>
           </div>
         </article>
       </div>
@@ -32,7 +41,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   methods: {
@@ -41,6 +50,10 @@ export default {
 
   beforeMount () {
     this.checkLogin()
+  },
+
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 </script>
