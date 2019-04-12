@@ -1,7 +1,15 @@
 import * as types from '../mutation-types'
 import axios from 'axios'
 
+// parse JWT payload
+function parseJwt (token) {
+  var base64Url = token.split('.')[1]
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+  return JSON.parse(window.atob(base64))
+}
+
 const getters = {
+  user: state => state.user
 }
 
 const state = {
@@ -15,7 +23,8 @@ const state = {
   },
   effect: {
     translate3d: true
-  }
+  },
+  user: {}
 }
 
 const mutations = {
@@ -40,6 +49,10 @@ const mutations = {
     for (let name in effectItem) {
       state.effect[name] = effectItem[name]
     }
+  },
+
+  [types.SET_USER] (state, data) {
+    state.user = data
   }
 }
 
@@ -54,6 +67,9 @@ const actions = {
       // check JWT with API
       try {
         await axios.get('/api/v1/auth/check', {headers: {Authorization: 'Bearer ' + jwt}})
+        // valid JWT - assign data in JWT to user object in state
+        const decodedJwt = parseJwt(jwt)
+        commit(types.SET_USER, decodedJwt)
       } catch (e) {
         // invalid JWT? - forward to login page (if this is production)
         if (process.env.NODE_ENV === 'production') {
