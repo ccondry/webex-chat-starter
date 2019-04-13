@@ -25,14 +25,19 @@
               </li>
             </ul>
             <!-- Admin pages -->
-            <ul v-if="user.admin">
-              <li>
-                <a href="/uccx">UCCX Instant Demo (in development)</a>
-              </li>
-              <li>
-                <a href="/rcdn">RCDN (Compete Lab) Demos (in development)</a>
-              </li>
-            </ul>
+            <div v-if="user.admin">
+              <p>
+                Admin Pages
+              </p>
+              <ul>
+                <li>
+                  <a href="/uccx">UCCX Instant Demo (in development)</a>
+                </li>
+                <li>
+                  <a href="/rcdn">RCDN (Compete Lab) Demos (in development)</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </article>
       </div>
