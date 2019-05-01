@@ -7,6 +7,8 @@ if [ $? -eq 0 ]; then
   npm run build
   if [ $? -eq 0 ]; then
     echo "npm build successful"
+    echo "making web files directory"
+    mkdir -p /var/www/toolbox/pcce
     echo "copying new web files"
     cp -rf dist/* /var/www/toolbox/landing/
   else
