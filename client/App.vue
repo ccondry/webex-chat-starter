@@ -9,6 +9,9 @@
           <div class="content">
             <ul>
               <li>
+                <a href="/customer">Customer Profiles</a>
+              </li>
+              <li>
                 <a href="/pcce">PCCE Instant Demo</a>
               </li>
               <!-- <li><a href="/uccx">UCCX Instant Demo Toolbox</a></li> -->
@@ -28,9 +31,6 @@
                 Admin Pages
               </p>
               <ul>
-                <li>
-                  <a href="/customer">Customer Profiles (in development)</a>
-                </li>
                 <li>
                   <a href="/uccx">UCCX Instant Demo (in development)</a>
                 </li>
