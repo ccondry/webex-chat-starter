@@ -29,6 +29,9 @@
               </p>
               <ul>
                 <li>
+                  <a href="/customer">Customer Profile (in development)</a>
+                </li>
+                <li>
                   <a href="/uccx">UCCX Instant Demo (in development)</a>
                 </li>
                 <li>
