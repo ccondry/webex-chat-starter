@@ -29,7 +29,7 @@
               </p>
               <ul>
                 <li>
-                  <a href="/customer">Customer Profile (in development)</a>
+                  <a href="/customer">Customer Profiles (in development)</a>
                 </li>
                 <li>
                   <a href="/uccx">UCCX Instant Demo (in development)</a>
