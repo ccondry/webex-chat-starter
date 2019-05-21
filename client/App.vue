@@ -12,9 +12,11 @@
                 <a href="/customer">Customer Profiles</a>
               </li>
               <li>
-                <a href="/pcce">PCCE Instant Demo</a>
+                <a href="/pcce">PCCE 11.6v3 Instant Demo</a>
               </li>
-              <!-- <li><a href="/uccx">UCCX Instant Demo Toolbox</a></li> -->
+              <li>
+                <a href="/uccx">UCCX 12.0v2 Instant Demo (QA)</a>
+              </li>
               <li>
                 <a href="/branding">Demo Branding</a>
               </li>
@@ -31,9 +33,6 @@
                 Admin Pages
               </p>
               <ul>
-                <li>
-                  <a href="/uccx">UCCX Instant Demo (in development)</a>
-                </li>
                 <li>
                   <a href="/rcdn">RCDN (Compete Lab) Demos (in development)</a>
                 </li>
