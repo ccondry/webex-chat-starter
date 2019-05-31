@@ -15,7 +15,7 @@
                 <a href="/pcce">PCCE 11.6v3 Instant Demo</a>
               </li>
               <li>
-                <a href="/uccx">UCCX 12.0v2 Instant Demo (QA)</a>
+                <a href="/uccx">UCCX 12.0v2 Instant Demo</a>
               </li>
               <li>
                 <a href="/branding">Demo Branding</a>
