@@ -18,7 +18,7 @@
                 <a href="/uccx">UCCX 12.0v2 Instant Demo</a>
               </li>
               <li v-if="isDcloud || user.admin">
-                <a href="/cwcc">CWCC v1 Instant Demo</a>
+                <a href="/cwcc">Webex Contact Center v1 Instant Demo</a>
               </li>
               <li>
                 <a href="/branding">Demo Branding</a>
