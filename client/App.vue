@@ -23,15 +23,16 @@
               <li>
                 <a href="/branding">Demo Branding</a>
               </li>
+              <li v-if="isCxdemo">
                 <a href="/chat">Facebook &amp; SMS Entry Points</a>
               </li>
-              <li>
+              <li v-if="isCxdemo">
                 <a href="/cjp-ccone">CJP CCOne Demo</a>
               </li>
-              <li>
+              <li v-if="isCxdemo">
                 <a href="/cjp-webex">CJP Webex Demo</a>
               </li>
-              <li>
+              <li v-if="isCxdemo">
                 <a href="/cwcc-tsa">CWCC TSA Demo</a>
               </li>
             </ul>
@@ -77,7 +78,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user', 'isCxdemo'])
   }
 }
 </script>
