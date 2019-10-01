@@ -12,10 +12,10 @@
                 <a href="/customer">Customer Profiles</a>
               </li>
               <li v-if="isDcloud || user.admin">
-                <a href="/pcce">PCCE 11.6v3 Instant Demo</a>
+                <a href="/pcce">Packaged Contact Center Enterprise 11.6v3 Instant Demo</a>
               </li>
               <li v-if="isDcloud || user.admin">
-                <a href="/uccx">UCCX 12.0v2 Instant Demo</a>
+                <a href="/uccx">Unified Contact Center Express 12.0v2 Instant Demo</a>
               </li>
               <li v-if="isDcloud || user.admin">
                 <a href="/cwcc">Webex Contact Center v1 Instant Demo</a>
