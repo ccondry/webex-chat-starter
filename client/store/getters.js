@@ -4,7 +4,12 @@ export const app = state => state.app
 // what kind of device is viewing this website
 export const device = state => state.app.device
 export const effect = state => state.app.effect
-export const isCxdemo = function (state) {
+// is this a cisco.com address? assume dcloud
+export const isDcloud = (state, getters) => getters.domain === 'cisco'
+// is this a cxdemo.net address? it is cxdemo
+export const isCxdemo = (state, getters) => getters.domain === 'cxdemo'
+// return domain name part for current user
+export const domain = function (state) {
   try {
     // get current hostname of the browser location
     const hostname = window.location.hostname
@@ -21,12 +26,7 @@ export const isCxdemo = function (state) {
     const domain = parts.shift()
     console.log('domain', domain)
 
-    // get the TLD
-    // const tld = parts.shift()
-    // console.log('tld', tld)
-
-    // return true for cxdemo.net, false for cisco.com
-    return domain === 'cxdemo'
+    return domain
   } catch (e) {
     console.log('failed to parse hostname:', e)
     return false
