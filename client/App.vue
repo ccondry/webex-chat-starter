@@ -11,13 +11,13 @@
               <li>
                 <a href="/customer">Customer Profiles</a>
               </li>
-              <li>
+              <li v-if="isDcloud || user.admin">
                 <a href="/pcce">PCCE 11.6v3 Instant Demo</a>
               </li>
-              <li>
+              <li v-if="isDcloud || user.admin">
                 <a href="/uccx">UCCX 12.0v2 Instant Demo</a>
               </li>
-              <li>
+              <li v-if="isDcloud || user.admin">
                 <a href="/cwcc">CWCC v1 Instant Demo</a>
               </li>
               <li>
@@ -78,7 +78,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['user', 'isCxdemo'])
+    ...mapGetters(['user', 'isCxdemo', 'isDcloud'])
   }
 }
 </script>
