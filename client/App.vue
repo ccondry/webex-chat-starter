@@ -18,9 +18,11 @@
                 <a href="/uccx">UCCX 12.0v2 Instant Demo</a>
               </li>
               <li>
-                <a href="/branding">Demo Branding</a>
+                <a href="/cwcc">CWCC v1 Instant Demo</a>
               </li>
               <li>
+                <a href="/branding">Demo Branding</a>
+              </li>
                 <a href="/chat">Facebook &amp; SMS Entry Points</a>
               </li>
               <li>
