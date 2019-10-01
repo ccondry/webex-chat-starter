@@ -9,7 +9,7 @@ export const isCxdemo = function (state) {
     // get current hostname of the browser location
     const hostname = window.location.hostname
     // console.log('hostname', hostname)
-    
+
     // split FQDN into parts
     const parts = hostname.split('.')
 
@@ -26,7 +26,7 @@ export const isCxdemo = function (state) {
     // console.log('tld', tld)
 
     // return true for cxdemo.net, false for cisco.com
-    return part2 === 'cxdemo'
+    return domain === 'cxdemo'
   } catch (e) {
     console.log('failed to parse hostname:', e)
     return false
