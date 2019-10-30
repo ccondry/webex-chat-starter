@@ -14,9 +14,9 @@
           </nav>
         </div>
         <div class="nav-right is-flex">
-          <span v-if="authenticated" class="nav-item">{{ user.username }} ({{ user.id }})</span>
-          <a v-if="authenticated" @click="clickLogout" class="nav-item">Logout</a>
-          <a v-if="!authenticated && !isProduction" @click="clickLogin" class="nav-item">Login</a>
+          <span v-if="isAuthenticated" class="nav-item">{{ user.username }} ({{ user.id }})</span>
+          <a v-if="isAuthenticated" @click="clickLogout" class="nav-item">Logout</a>
+          <a v-if="!isAuthenticated && !isProduction" @click="clickLogin" class="nav-item">Login</a>
         </div>
       </nav>
     </div>
@@ -37,7 +37,7 @@ export default {
   },
 
   mount () {
-    if (!this.authenticated && !this.isProduction) {
+    if (!this.isAuthenticated && !this.isProduction) {
       // pop development login modal
       this.clickLogin()
     }
@@ -45,7 +45,7 @@ export default {
 
   computed: {
     ...mapGetters([
-      'authenticated',
+      'isAuthenticated',
       'user',
       'isProduction'
     ])
