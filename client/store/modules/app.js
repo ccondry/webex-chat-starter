@@ -106,6 +106,7 @@ const actions = {
         // and store JWT in state
         commit(types.SET_JWT, jwt)
       } catch (e) {
+        console.log(e)
         // invalid JWT? - forward to login page (if this is production)
         if (getters.isProduction) {
           window.location = '/auth/login?destination=' + window.location
