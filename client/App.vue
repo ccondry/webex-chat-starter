@@ -42,23 +42,17 @@
     </div>
 
     <!-- Admin pages -->
-    <div class="tile is-ancestor" v-if="user.admin">
+    <div class="tile is-ancestor" v-if="user.admin || user.isSupport">
       <div class="tile is-parent is-3">
       </div>
       <div class="tile is-parent is-6">
         <article class="tile is-child box">
-          <h1 class="title">Admin Pages</h1>
+          <h1 class="title">Support Pages</h1>
           <div class="content">
             <ul>
               <li>
                 <a href="/management">Management and Administration</a>
               </li>
-              <!-- <li>
-                <a href="/rcdn">RCDN (Compete Lab) Demos (in development)</a>
-              </li> -->
-              <!-- <li>
-                <a href="/wccc">Webex Cloud Contact Center Instant Demo</a>
-              </li> -->
             </ul>
           </div>
         </article>
