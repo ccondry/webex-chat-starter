@@ -103,6 +103,8 @@ const actions = {
         // valid JWT - assign data in JWT to user object in state
         const decodedJwt = parseJwt(jwt)
         commit(types.SET_USER, decodedJwt)
+        // and store JWT in state
+        commit(types.SET_JWT, jwt)
       } catch (e) {
         // invalid JWT? - forward to login page (if this is production)
         if (getters.isProduction) {
