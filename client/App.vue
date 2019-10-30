@@ -51,8 +51,11 @@
           <div class="content">
             <ul>
               <li>
-                <a href="/rcdn">RCDN (Compete Lab) Demos (in development)</a>
+                <a href="/management">Management and Administration</a>
               </li>
+              <!-- <li>
+                <a href="/rcdn">RCDN (Compete Lab) Demos (in development)</a>
+              </li> -->
               <!-- <li>
                 <a href="/wccc">Webex Cloud Contact Center Instant Demo</a>
               </li> -->
