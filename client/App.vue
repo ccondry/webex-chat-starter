@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-loading :is-full-page="true" :active="!authCheckDone" :can-cancel="false"></b-loading>
-    <div v-if="isAuthenticated">
+    <div>
       <navbar :show="true"></navbar>
       <section class="app-main">
         <div class="container is-fluid is-marginless app-content">
