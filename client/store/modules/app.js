@@ -29,7 +29,7 @@ const state = {
   effect: {
     translate3d: true
   },
-  user: null,
+  user: {},
   jwt: null,
   forwardTo: null
 }
