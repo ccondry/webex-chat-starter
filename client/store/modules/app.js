@@ -13,7 +13,7 @@ function parseJwt (token) {
 const getters = {
   user: state => state.user,
   jwt: state => state.jwt,
-  authenticated: state => state.jwt !== null,
+  isAuthenticated: state => state.jwt !== null,
   forwardTo: state => state.forwardTo
 }
 

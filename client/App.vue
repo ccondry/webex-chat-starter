@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-loading :is-full-page="true" :active="!authCheckDone" :can-cancel="false"></b-loading>
-    <div v-if="authenticated">
+    <div v-if="isAuthenticated">
       <navbar :show="true"></navbar>
       <section class="app-main">
         <div class="container is-fluid is-marginless app-content">
@@ -105,7 +105,7 @@ export default {
         await this.checkLogin()
         console.log('checking login done.')
         this.authCheckDone = true
-        if (this.authenticated === false) {
+        if (this.isAuthenticated === false) {
           // user is not authenticated - send them to login
           if (this.isProduction) {
             // production - redirect to login page
@@ -142,7 +142,7 @@ export default {
       'user',
       'isCxdemo',
       'isDcloud',
-      'authenticated',
+      'isAuthenticated',
       'isProduction'
     ])
   }
