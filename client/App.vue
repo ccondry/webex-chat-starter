@@ -107,7 +107,7 @@ export default {
         this.authCheckDone = true
         if (this.authenticated === false) {
           // user is not authenticated - send them to login
-          if (this.production) {
+          if (this.isProduction) {
             // production - redirect to login page
             window.location = '/auth/login?destination=' + window.location
           } else {
@@ -142,7 +142,8 @@ export default {
       'user',
       'isCxdemo',
       'isDcloud',
-      'authenticated'
+      'authenticated',
+      'isProduction'
     ])
   }
 }
