@@ -146,6 +146,21 @@ export default {
       'isAuthenticated',
       'isProduction'
     ])
+  },
+
+  watch: {
+    async isAuthenticated (val, oldVal) {
+      // if user goes from logged in to logged out, forward them to the login page
+      if (oldVal === true && val === false) {
+        if (this.isProduction) {
+          // production - redirect to login page
+          window.location = '/auth/login?destination=' + window.location
+        } else {
+          // development - pop JWT form
+          this.clickLogin()
+        }
+      }
+    }
   }
 }
 </script>
