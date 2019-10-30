@@ -78,7 +78,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
-import Navbar from 'components/Navbar'
+import Navbar from 'components/nav-bar'
 
 export default {
   components: {
