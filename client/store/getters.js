@@ -8,6 +8,8 @@ export const effect = state => state.app.effect
 export const isDcloud = (state, getters) => getters.domain === 'cisco'
 // is this a cxdemo.net address? it is cxdemo
 export const isCxdemo = (state, getters) => getters.domain === 'cxdemo'
+export const isProduction = state => state.isProduction
+export const endpoints = state => state.endpoints
 // return domain name part for current user
 export const domain = function (state) {
   try {
