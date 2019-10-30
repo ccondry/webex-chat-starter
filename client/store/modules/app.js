@@ -105,7 +105,7 @@ const actions = {
         commit(types.SET_USER, decodedJwt)
       } catch (e) {
         // invalid JWT? - forward to login page (if this is production)
-        if (process.env.NODE_ENV === 'production') {
+        if (getters.isProduction) {
           window.location = '/auth/login?destination=' + window.location
         }
       }
@@ -113,7 +113,7 @@ const actions = {
       // no JWT in localStorage
       console.log('JWT not found in localstorage.')
       // forward user to login page, if this is running in production
-      if (process.env.NODE_ENV === 'production') {
+      if (getters.isProduction) {
         window.location = '/auth/login?destination=' + window.location
       }
     }
