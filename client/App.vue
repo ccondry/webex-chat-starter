@@ -109,7 +109,7 @@ export default {
           // user is not authenticated - send them to login
           if (this.isProduction) {
             // production - redirect to login page
-            window.location = '/auth/login?destination=' + window.location
+            // window.location = '/auth/login?destination=' + window.location
           } else {
             // development - pop JWT form
             this.clickLogin()
