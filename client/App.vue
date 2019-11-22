@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <b-loading :is-full-page="true" :active="!authCheckDone" :can-cancel="false"></b-loading>
+    <b-loading
+    :is-full-page="true"
+    :active="!authCheckDone"
+    :can-cancel="false"></b-loading>
     <div v-if="isAuthenticated">
 
       <navbar :show="true"></navbar>
@@ -21,32 +24,8 @@
                     <h1 class="title">dCloud Collaboration Toolbox</h1>
                     <div class="content">
                       <ul>
-                        <li>
-                          <a href="/customer">Customer Profiles</a>
-                        </li>
-                        <li v-if="isDcloud || user.admin">
-                          <a href="/pcce">Packaged Contact Center Enterprise 11.6v3 Instant Demo</a>
-                        </li>
-                        <li v-if="isDcloud || user.admin">
-                          <a href="/uccx">Unified Contact Center Express 12.0v2 Instant Demo</a>
-                        </li>
-                        <li v-if="isDcloud || user.admin">
-                          <a href="/cwcc">Webex Contact Center v1 Instant Demo</a>
-                        </li>
-                        <li>
-                          <a href="/branding">Demo Branding</a>
-                        </li>
-                        <li v-if="isCxdemo">
-                          <a href="/chat">Facebook &amp; SMS Entry Points</a>
-                        </li>
-                        <li v-if="isCxdemo">
-                          <a href="/cjp-ccone">CJP CCOne Demo</a>
-                        </li>
-                        <li v-if="isCxdemo">
-                          <a href="/cjp-webex">CJP Webex Demo</a>
-                        </li>
-                        <li v-if="isCxdemo">
-                          <a href="/cwcc-tsa">CWCC TSA Demo</a>
+                        <li v-for="link of links">
+                          <a :href="link.href">{{ link.text }}</a>
                         </li>
                       </ul>
                     </div>
@@ -55,7 +34,8 @@
               </div>
 
               <!-- Admin pages -->
-              <div class="tile is-ancestor" v-if="user.admin || user.isSupport">
+              <div class="tile is-ancestor"
+              v-if="user.admin || user.isSupport">
                 <div class="tile is-parent is-3">
                 </div>
                 <div class="tile is-parent is-6">
@@ -64,13 +44,16 @@
                     <div class="content">
                       <ul>
                         <li>
-                          <a href="/management">Management and Administration</a>
+                          <a href="/management">
+                            Management and Administration
+                          </a>
                         </li>
                       </ul>
                     </div>
                   </article>
                 </div>
               </div>
+              <!-- /Admin pages -->
             </div>
           </transition>
         </div>
@@ -144,8 +127,61 @@ export default {
       'isCxdemo',
       'isDcloud',
       'isAuthenticated',
-      'isProduction'
-    ])
+      'isProduction',
+      'datacenter'
+    ]),
+    links () {
+      const ret = []
+      // for everyone
+      ret.push({
+        link: '/customer',
+        text: 'Customer Profiles'
+      })
+      ret.push({
+        link: '/branding',
+        text: 'Demo Branding'
+      })
+
+      // for dcloud users, or admins
+      if (this.isDcloud || this.user.admin) {
+        ret.push({
+          link: '/pcce',
+          text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
+        })
+        // disable UCCX RTP for now
+        if (this.datacenter !== 'RTP') {
+          ret.push({
+            link: '/uccx',
+            text: 'Unified Contact Center Express 12.0v2 Instant Demo'
+          })
+        }
+        ret.push({
+          link: '/cwcc',
+          text: 'Webex Contact Center v1 Instant Demo'
+        })
+      }
+      // for cxdemo domains
+      if (this.isCxdemo) {
+        ret.push({
+          link: '/chat',
+          text: 'Facebook &amp; SMS Entry Points'
+        })
+        ret.push({
+          link: '/cjp-ccone',
+          text: 'CJP CCOne Demo'
+        })
+        ret.push({
+          link: '/cjp-webex',
+          text: 'CJP Webex Demo'
+        })
+        ret.push({
+          link: '/cwcc-tsa',
+          text: 'CWCC TSA Demo'
+        })
+      }
+
+      return ret
+    }
   },
 
   watch: {

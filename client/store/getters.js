@@ -20,9 +20,9 @@ export const domain = function (state) {
     // split FQDN into parts
     const parts = hostname.split('.')
 
-    // get the subdomain
-    const subdomain = parts.shift()
-    console.log('subdomain', subdomain)
+    // get the subDomain
+    const subDomain = parts.shift()
+    console.log('subDomain', subDomain)
 
     // get the domain name
     const domain = parts.shift()
@@ -32,5 +32,41 @@ export const domain = function (state) {
   } catch (e) {
     console.log('failed to parse hostname:', e)
     return false
+  }
+}
+// return domain name part for current user
+export const subDomain = function (state) {
+  try {
+    // get current hostname of the browser location
+    const hostname = window.location.hostname
+    // console.log('hostname', hostname)
+
+    // split FQDN into parts
+    const parts = hostname.split('.')
+
+    // get the subDomain
+    const subDomain = parts.shift()
+    console.log('subDomain', subDomain)
+
+    return subDomain
+  } catch (e) {
+    console.log('failed to parse hostname:', e)
+    return false
+  }
+}
+export const datacenter = function (state, getters) {
+  try {
+    const parts = getters.subDomain.split('-')
+    if (parts.length === 4) {
+      // dcloud-collab-toolbox-rtp
+      return parts.pop().toUpperCase()
+    } else {
+      // localhost probably
+      return 'DEV'
+    }
+  } catch (e) {
+    console.log('could not parse datacenter from subDomain', getters.subDomain, ':', e.message)
+    // return DEV I guess
+    return 'DEV'
   }
 }
