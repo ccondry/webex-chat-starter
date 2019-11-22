@@ -143,8 +143,7 @@ export default {
         text: 'Customer Profiles'
       })
       ret.push({
-        href: '/brandin
-        g',
+        href: '/branding',
         text: 'Demo Branding'
       })
 
