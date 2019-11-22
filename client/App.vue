@@ -148,8 +148,12 @@ export default {
           link: '/pcce',
           text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
         })
-        // disable UCCX RTP for now
         if (this.datacenter !== 'RTP') {
+          // disable UCCX RTP for now
+          ret.push({
+            text: 'Unified Contact Center Express 12.0v2 Instant Demo (Temporarily Unavailable in RTP)'
+          })
+        } else {
           ret.push({
             link: '/uccx',
             text: 'Unified Contact Center Express 12.0v2 Instant Demo'
