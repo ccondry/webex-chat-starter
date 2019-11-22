@@ -139,18 +139,19 @@ export default {
       const ret = []
       // for everyone
       ret.push({
-        link: '/customer',
+        href: '/customer',
         text: 'Customer Profiles'
       })
       ret.push({
-        link: '/branding',
+        href: '/brandin
+        g',
         text: 'Demo Branding'
       })
 
       // for dcloud users, or admins
       if (this.isDcloud || this.user.admin) {
         ret.push({
-          link: '/pcce',
+          href: '/pcce',
           text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
         })
         if (this.datacenter !== 'RTP') {
@@ -160,31 +161,31 @@ export default {
           })
         } else {
           ret.push({
-            link: '/uccx',
+            href: '/uccx',
             text: 'Unified Contact Center Express 12.0v2 Instant Demo'
           })
         }
         ret.push({
-          link: '/cwcc',
+          href: '/cwcc',
           text: 'Webex Contact Center v1 Instant Demo'
         })
       }
       // for cxdemo domains
       if (this.isCxdemo) {
         ret.push({
-          link: '/chat',
+          href: '/chat',
           text: 'Facebook &amp; SMS Entry Points'
         })
         ret.push({
-          link: '/cjp-ccone',
+          href: '/cjp-ccone',
           text: 'CJP CCOne Demo'
         })
         ret.push({
-          link: '/cjp-webex',
+          href: '/cjp-webex',
           text: 'CJP Webex Demo'
         })
         ret.push({
-          link: '/cwcc-tsa',
+          href: '/cwcc-tsa',
           text: 'CWCC TSA Demo'
         })
       }
