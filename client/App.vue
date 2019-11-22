@@ -153,7 +153,7 @@ export default {
           href: '/pcce',
           text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
         })
-        if (this.datacenter !== 'RTP') {
+        if (this.datacenter === 'RTP') {
           // disable UCCX RTP for now
           ret.push({
             text: 'Unified Contact Center Express 12.0v2 Instant Demo (Temporarily Unavailable in RTP)'
