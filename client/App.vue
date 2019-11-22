@@ -25,7 +25,12 @@
                     <div class="content">
                       <ul>
                         <li v-for="link of links">
-                          <a :href="link.href">{{ link.text }}</a>
+                          <span v-if="link.href">
+                            <a :href="link.href">{{ link.text }}</a>
+                          </span>
+                          <span v-else>
+                            {{ link.text }}
+                          </span>
                         </li>
                       </ul>
                     </div>
