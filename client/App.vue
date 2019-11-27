@@ -153,17 +153,10 @@ export default {
           href: '/pcce',
           text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
         })
-        if (this.datacenter === 'RTP') {
-          // disable UCCX RTP for now
-          ret.push({
-            text: 'Unified Contact Center Express 12.0v2 Instant Demo (Temporarily Unavailable in RTP)'
-          })
-        } else {
-          ret.push({
-            href: '/uccx',
-            text: 'Unified Contact Center Express 12.0v2 Instant Demo'
-          })
-        }
+        ret.push({
+          href: '/uccx',
+          text: 'Unified Contact Center Express 12.0v2 Instant Demo'
+        })
         ret.push({
           href: '/cwcc',
           text: 'Webex Contact Center v1 Instant Demo'
