@@ -16,6 +16,8 @@ else
     echo "running npm install"
     npm i
     if [ $? -eq 0 ]; then
+      echo "runnin npm rebuild node-sass..."
+      npm rebuild node-sass
       echo "running npm run build..."
       npm run build
       if [ $? -eq 0 ]; then
