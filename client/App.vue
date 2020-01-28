@@ -159,7 +159,7 @@ export default {
         })
         ret.push({
           href: '/cwcc',
-          text: 'Webex Contact Center v1 Instant Demo'
+          text: 'Webex Contact Center v2 Instant Demo'
         })
       }
       // for cxdemo domains
