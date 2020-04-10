@@ -24,13 +24,14 @@
                     <h1 class="title">dCloud Collaboration Toolbox</h1>
                     <div class="content">
                       <ul>
-                        <li v-for="link of links">
+                        <li v-for="(link, index) of links" :key="index">
                           <span v-if="link.href">
                             <a :href="link.href">{{ link.text }}</a>
                           </span>
                           <span v-else>
                             {{ link.text }}
                           </span>
+                          <b-tag v-if="link.isNew" :type="flashing">New</b-tag>
                         </li>
                       </ul>
                     </div>
@@ -74,7 +75,8 @@ import Navbar from 'components/nav-bar'
 export default {
   data () {
     return {
-      authCheckDone: false
+      authCheckDone: false,
+      alternator: true
     }
   },
 
@@ -124,6 +126,10 @@ export default {
 
   mounted () {
     this.authCheck()
+    // set up alternator to flip between true and false every 1/2 second
+    setInterval(() => {
+      this.alternator = !this.alternator
+    }, 1000)
   },
 
   computed: {
@@ -135,6 +141,9 @@ export default {
       'isProduction',
       'datacenter'
     ]),
+    flashing () {
+      return this.alternator ? 'is-default' : 'is-primary'
+    },
     links () {
       const ret = []
       // for everyone
@@ -147,12 +156,20 @@ export default {
         text: 'Demo Branding'
       })
 
-      // for dcloud users, or admins
+      // for dcloud domains, or admins
       if (this.isDcloud || this.user.admin) {
         ret.push({
           href: '/pcce',
           text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
         })
+        // only show pcce 12 to admins for now
+        if (this.user.admin) {
+          ret.push({
+            href: '/pcce-12-0',
+            text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
+            isNew: true
+          })
+        }
         ret.push({
           href: '/uccx',
           text: 'Unified Contact Center Express 12.0v2 Instant Demo'
@@ -166,7 +183,7 @@ export default {
       if (this.isCxdemo) {
         ret.push({
           href: '/chat',
-          text: 'Facebook &amp; SMS Entry Points'
+          text: 'Facebook & SMS Entry Points'
         })
         ret.push({
           href: '/cjp-ccone',
