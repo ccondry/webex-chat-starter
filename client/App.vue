@@ -162,14 +162,6 @@ export default {
           href: '/pcce',
           text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
         })
-        // only show pcce 12 to admins for now
-        if (this.user.admin) {
-          ret.push({
-            href: '/pcce-12-0',
-            text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
-            isNew: true
-          })
-        }
         ret.push({
           href: '/uccx',
           text: 'Unified Contact Center Express 12.0v2 Instant Demo'
@@ -181,6 +173,11 @@ export default {
       }
       // for cxdemo domains
       if (this.isCxdemo) {
+        ret.push({
+          href: '/pcce-12-0',
+          text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
+          isNew: true
+        })
         ret.push({
           href: '/chat',
           text: 'Facebook & SMS Entry Points'
