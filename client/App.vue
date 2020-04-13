@@ -179,6 +179,11 @@ export default {
           isNew: true
         })
         ret.push({
+          href: '/webex-v3prod',
+          text: 'Webex Contact Center v3 Instant Demo',
+          isNew: true
+        })
+        ret.push({
           href: '/chat',
           text: 'Facebook & SMS Entry Points'
         })
