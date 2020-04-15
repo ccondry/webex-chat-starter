@@ -156,11 +156,16 @@ export default {
         text: 'Demo Branding'
       })
 
-      // for dcloud domains, or admins
+      // for dcloud domains, or admins using the cxdemo domain
       if (this.isDcloud || this.user.admin) {
         ret.push({
           href: '/pcce',
           text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
+        })
+        ret.push({
+          href: '/pcce-12-0',
+          text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
+          isNew: true
         })
         ret.push({
           href: '/uccx',
@@ -171,18 +176,13 @@ export default {
           text: 'Webex Contact Center v2 Instant Demo'
         })
       }
-      // for cxdemo domains
+      // for cxdemo domain
       if (this.isCxdemo) {
-        ret.push({
-          href: '/pcce-12-0',
-          text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
-          isNew: true
-        })
-        ret.push({
-          href: '/webex-v3prod',
-          text: 'Webex Contact Center v3 Instant Demo',
-          isNew: true
-        })
+        // ret.push({
+        //   href: '/webex-v3prod',
+        //   text: 'Webex Contact Center v3 Instant Demo',
+        //   isNew: true
+        // })
         ret.push({
           href: '/chat',
           text: 'Facebook & SMS Entry Points'
