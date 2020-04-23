@@ -176,6 +176,15 @@ export default {
           text: 'Webex Contact Center v2 Instant Demo'
         })
       }
+
+      // testing Webex Experience Manager v1
+      if (this.user.admin) {
+        ret.push({
+          href: '/wxm',
+          text: 'Webex Experience Manager v1 Instant Demo'
+        })
+      }
+
       // for cxdemo domain
       if (this.isCxdemo) {
         // ret.push({
