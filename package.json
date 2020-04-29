@@ -15,7 +15,9 @@
     "contact",
     "center",
     "pcce",
-    "uccx"
+    "uccx",
+    "webex",
+    "cjp"
   ],
   "engines": {
     "node": ">=4",
