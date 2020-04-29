@@ -31,6 +31,7 @@
     "gh": "npm run build && gh-pages -d dist",
     "lint": "eslint --ext .js .vue client/*",
     "lint:fix": "eslint --fix --ext .js .vue electron.js client/* build/* config/*",
+    "start": "cross-env NODE_ENV=development node build/dev-server.js",
     "test": "echo lol"
   },
   "dependencies": {
