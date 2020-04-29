@@ -8,7 +8,7 @@
           <nav class="level">
             <div class="level-item">
               <p>
-                dCloud Toolbox
+                dCloud Collaboration Toolbox
               </p>
             </div>
           </nav>
