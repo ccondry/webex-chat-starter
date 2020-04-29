@@ -145,6 +145,15 @@ export default {
       return this.alternator ? 'is-default' : 'is-primary'
     },
     links () {
+      if (this.user.admin) {
+        // admin sees all
+        return this.allLinks
+      } else {
+        // user sees all links, minus admin-only links
+        return this.allLinks.filter(v => !v.isDevelopment)
+      }
+    },
+    allLinks () {
       const ret = []
       // for everyone
       ret.push({
@@ -175,13 +184,17 @@ export default {
           href: '/cwcc',
           text: 'Webex Contact Center v2 Instant Demo'
         })
-      }
-
-      // testing Webex Experience Manager v1
-      if (this.user.admin) {
+        ret.push({
+          href: '/webex-v3prod',
+          text: 'Webex Contact Center v3 Instant Demo',
+          isNew: true,
+          isDevelopment: true
+        })
         ret.push({
           href: '/wxm',
-          text: 'Webex Experience Manager v1 Instant Demo'
+          text: 'Webex Experience Manager v1 Instant Demo',
+          isNew: true,
+          isDevelopment: true
         })
       }
 
@@ -256,5 +269,4 @@ body {
 .app-content {
   padding: 20px;
 }
-
 </style>
