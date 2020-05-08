@@ -145,8 +145,9 @@ export default {
       return this.alternator ? 'is-default' : 'is-primary'
     },
     links () {
-      if (this.user.admin) {
+      if (this.user.admin || (this.user.groups && this.user.groups.includes('QA'))) {
         // admin sees all
+        // show QA users the development links too
         return this.allLinks
       } else {
         // user sees all links, minus admin-only links
@@ -184,6 +185,8 @@ export default {
           href: '/cwcc',
           text: 'Webex Contact Center v2 Instant Demo'
         })
+      }
+      if (this.isDcloud || this.user.admin || (this.user.groups && this.user.groups.includes('QA'))) {
         ret.push({
           href: '/webex-v3prod',
           text: 'Webex Contact Center v3 Instant Demo',
@@ -197,7 +200,6 @@ export default {
           isDevelopment: true
         })
       }
-
       // for cxdemo domain
       if (this.isCxdemo) {
         // ret.push({
