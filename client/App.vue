@@ -195,7 +195,7 @@ export default {
         })
         ret.push({
           href: '/wxm',
-          text: 'Webex Experience Manager v1 Instant Demo',
+          text: 'Webex Experience Management v1 Instant Demo',
           isNew: true,
           isDevelopment: true
         })
