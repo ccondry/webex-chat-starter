@@ -1,6 +1,4 @@
 import * as types from '../mutation-types'
-import axios from 'axios'
-// import { Toast } from 'buefy/dist/components/toast'
 import { ToastProgrammatic as Toast } from 'buefy'
 
 // parse JWT payload
@@ -90,27 +88,38 @@ const actions = {
     console.log('checking localstorage for JWT login token')
     // retrieve auth token from localStorage
     const jwt = window.localStorage.getItem('jwt')
+    console.log('jwt', jwt)
     // if we found a token
     if (jwt !== null) {
       console.log('JWT login token found in localStorage')
       // check JWT with API
       try {
-        await axios.get(getters.endpoints.authCheck, {
+        const response = await window.fetch(getters.endpoints.authCheck, {
           headers: {
             Authorization: 'Bearer ' + jwt
           }
         })
-        // valid JWT - assign data in JWT to user object in state
-        const decodedJwt = parseJwt(jwt)
-        commit(types.SET_USER, decodedJwt)
-        // and store JWT in state
-        commit(types.SET_JWT, jwt)
-      } catch (e) {
-        console.log(e)
-        // invalid JWT? - forward to login page (if this is production)
-        if (getters.isProduction) {
-          window.location = '/auth/login?destination=' + window.location
+        if (response.ok) {
+          // valid JWT - assign data in JWT to user object in state
+          const decodedJwt = parseJwt(jwt)
+          commit(types.SET_USER, decodedJwt)
+          // and store JWT in state
+          commit(types.SET_JWT, jwt)
+        } else {
+          // response not OK
+          if (response.status === 401) {
+            console.log('server said 401. unsetting JWT.')
+            // invalid JWT - forward to login page (if this is production)
+            if (getters.isProduction) {
+              window.location = '/auth/login?destination=' + window.location
+            } else {
+              // development - just unset the JWT from localstorage
+              dispatch('unsetJwt')
+            }
+          }
         }
+      } catch (e) {
+        console.log('fetch error?', e)
       }
     } else {
       // no JWT in localStorage
@@ -125,22 +134,33 @@ const actions = {
     console.log('logging out user')
     try {
       // tell server we're logging out
-      const options = {
+      const response = await window.fetch(getters.endpoints.logout, {
         headers: {
           Authorization: 'Bearer ' + getters.jwt
         }
-      }
-      const response = await axios.post(getters.endpoints.logout, null, options)
-
+      })
       // did they successfully log out of superuser mode?
-      if (response.status >= 200 && response.status < 300) {
-        if (response.data.jwt) {
-          // store new auth token in localStorage
-          dispatch('setJwt', response.data.jwt)
-          // load user data using JWT
-          // dispatch('loadUser')
-          dispatch('successNotification', `Successfully logged out of ${getters.user.username}`)
-        } else {
+      if (response.ok) {
+        try {
+          const json = await response.json()
+          if (json.jwt) {
+            // switch-user was active - logging back in as previous user
+            // store new auth token in localStorage
+            dispatch('setJwt', response.data.jwt)
+            // load user data using JWT
+            // dispatch('loadUser')
+            dispatch('successNotification', `Successfully logged out of ${getters.user.username}`)
+          } else {
+            // normal logout
+            // remove JWT
+            commit(types.SET_JWT, null)
+            // remove JWT from localStorage
+            window.localStorage.removeItem('jwt')
+            // remove user from state
+            commit(types.SET_USER, {})
+          }
+        } catch (e) {
+          // no json data in response - normal logout
           // remove JWT
           commit(types.SET_JWT, null)
           // remove JWT from localStorage

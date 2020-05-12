@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "animejs": "^2.0.1",
-    "axios": "^0.18.0",
     "buefy": "^0.8.6",
     "bulma": "^0.3.2",
     "fuzzy": "^0.1.3",
