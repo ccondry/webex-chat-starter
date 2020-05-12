@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
 import { ToastProgrammatic as Toast } from 'buefy'
+import pkg from '../../../package.json'
 
 // parse JWT payload
 function parseJwt (token) {
@@ -12,7 +13,9 @@ const getters = {
   user: state => state.user,
   jwt: state => state.jwt,
   isAuthenticated: state => state.jwt !== null,
-  forwardTo: state => state.forwardTo
+  forwardTo: state => state.forwardTo,
+  authApiVersion: state => state.authApiVersion,
+  uiVersion: () => pkg.version
 }
 
 const state = {
@@ -29,7 +32,8 @@ const state = {
   },
   user: {},
   jwt: null,
-  forwardTo: null
+  forwardTo: null,
+  authApiVersion: 'loading...'
 }
 
 const mutations = {
@@ -66,10 +70,41 @@ const mutations = {
 
   [types.FORWARD_TO] (state, data) {
     state.forwardTo = data
+  },
+
+  [types.SET_VERSION] (state, data) {
+    state.authApiVersion = data.version
   }
 }
 
 const actions = {
+  async getApiVersion ({getters, dispatch, commit}) {
+    // dispatch('setLoading', {group: 'app', type: 'authApiInfo', value: true})
+    const operation = 'auth API version'
+    console.log('getting', operation, '...')
+    try {
+      const endpoint = getters.endpoints.version
+      console.log('getting', operation, 'endpoint', endpoint, '...')
+      // get REST data
+      const response = await window.fetch(endpoint)
+      if (response.ok) {
+        // parse response
+        const data = await response.json()
+        // put in state
+        commit(types.SET_VERSION, data)
+        console.log('get', operation, '- response:', data)
+      } else {
+        // parse error response text
+        const error = await response.text()
+        console.log('get', operation, '- failed:', response.status, response.statusText, error)
+      }
+    } catch (e) {
+      console.log('error getting', operation, e)
+      dispatch('errorNotification', {title: 'Failed to get ' + operation, error: e})
+    } finally {
+      // dispatch('setLoading', {group: 'app', type: 'authApiInfo', value: false})
+    }
+  },
   successNotification ({getters}, message) {
     Toast.open({
       // duration: 8000,

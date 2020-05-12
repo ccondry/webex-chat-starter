@@ -22,7 +22,8 @@ const store = new Vuex.Store({
     isProduction: process.env.NODE_ENV === 'production',
     endpoints: {
       logout: baseUrl + '/logout',
-      authCheck: baseUrl + '/check'
+      authCheck: baseUrl + '/check',
+      version: baseUrl + '/version'
     }
   }
 })

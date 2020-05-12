@@ -1,70 +1,89 @@
 <template>
   <div id="app">
-    <b-loading
-    :is-full-page="true"
-    :active="!authCheckDone"
-    :can-cancel="false"></b-loading>
-    <div v-if="isAuthenticated">
+    <!-- main section -->
+    <div style="min-height: calc(100vh - 1.6em);">
+      <!-- loading indicator -->
+      <b-loading
+      :is-full-page="true"
+      :active="!authCheckDone"
+      :can-cancel="false"></b-loading>
 
-      <navbar :show="true"></navbar>
-      <section class="app-main">
-        <div class="container is-fluid is-marginless app-content">
-          <!-- <levelbar></levelbar> -->
-          <transition
-            mode="out-in"
-            enter-active-class="fadeIn"
-            leave-active-class="fadeOut"
-            appear>
-            <div>
-              <div class="tile is-ancestor">
-                <div class="tile is-parent is-3">
+      <!-- main content -->
+      <div v-if="isAuthenticated">
+        <navbar :show="true"></navbar>
+        <section class="app-main">
+          <div class="container is-fluid is-marginless app-content">
+            <!-- <levelbar></levelbar> -->
+            <transition
+              mode="out-in"
+              enter-active-class="fadeIn"
+              leave-active-class="fadeOut"
+              appear>
+              <div>
+                <div class="tile is-ancestor">
+                  <div class="tile is-parent is-3">
+                  </div>
+                  <div class="tile is-parent is-6">
+                    <article class="tile is-child box">
+                      <h1 class="title">dCloud Collaboration Toolbox</h1>
+                      <div class="content">
+                        <ul>
+                          <li v-for="(link, index) of links" :key="index">
+                            <span v-if="link.href">
+                              <a :href="link.href">{{ link.text }}</a>
+                            </span>
+                            <span v-else>
+                              {{ link.text }}
+                            </span>
+                            <b-tag v-if="link.isNew" :type="flashing">New</b-tag>
+                          </li>
+                        </ul>
+                      </div>
+                    </article>
+                  </div>
                 </div>
-                <div class="tile is-parent is-6">
-                  <article class="tile is-child box">
-                    <h1 class="title">dCloud Collaboration Toolbox</h1>
-                    <div class="content">
-                      <ul>
-                        <li v-for="(link, index) of links" :key="index">
-                          <span v-if="link.href">
-                            <a :href="link.href">{{ link.text }}</a>
-                          </span>
-                          <span v-else>
-                            {{ link.text }}
-                          </span>
-                          <b-tag v-if="link.isNew" :type="flashing">New</b-tag>
-                        </li>
-                      </ul>
-                    </div>
-                  </article>
-                </div>
-              </div>
 
-              <!-- Admin pages -->
-              <div class="tile is-ancestor"
-              v-if="user.admin || user.isSupport">
-                <div class="tile is-parent is-3">
+                <!-- Admin pages -->
+                <div class="tile is-ancestor"
+                v-if="user.admin || user.isSupport">
+                  <div class="tile is-parent is-3">
+                  </div>
+                  <div class="tile is-parent is-6">
+                    <article class="tile is-child box">
+                      <h1 class="title">Support Pages</h1>
+                      <div class="content">
+                        <ul>
+                          <li>
+                            <a href="/management">
+                              Management and Administration
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </article>
+                  </div>
                 </div>
-                <div class="tile is-parent is-6">
-                  <article class="tile is-child box">
-                    <h1 class="title">Support Pages</h1>
-                    <div class="content">
-                      <ul>
-                        <li>
-                          <a href="/management">
-                            Management and Administration
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </article>
-                </div>
+                <!-- /Admin pages -->
               </div>
-              <!-- /Admin pages -->
-            </div>
-          </transition>
-        </div>
-      </section>
+            </transition>
+          </div>
+        </section>
+      </div>
     </div>
+    <!-- footer -->
+    <footer class="footer" style="height: 1.6em; padding: 0; background-color: #ebebeb">
+      <div class="content">
+        <small style="padding-right: 2em; padding-left: 1em;">
+          UI version {{ uiVersion }}
+        </small>
+        <!-- <small style="padding-right: 2em;">
+          REST API version {{ apiVersion }}
+        </small> -->
+        <small>
+          Auth API version {{ authApiVersion }}
+        </small>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -87,7 +106,8 @@ export default {
   methods: {
     ...mapActions([
       'checkLogin',
-      'setJwt'
+      'setJwt',
+      'getApiVersion'
     ]),
     async authCheck () {
       try {
@@ -125,6 +145,7 @@ export default {
   },
 
   mounted () {
+    this.getApiVersion()
     this.authCheck()
     // set up alternator to flip between true and false every 1/2 second
     setInterval(() => {
@@ -139,7 +160,9 @@ export default {
       'isDcloud',
       'isAuthenticated',
       'isProduction',
-      'datacenter'
+      'datacenter',
+      'uiVersion',
+      'authApiVersion'
     ]),
     flashing () {
       return this.alternator ? 'is-default' : 'is-primary'
