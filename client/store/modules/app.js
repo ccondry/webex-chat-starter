@@ -170,6 +170,7 @@ const actions = {
     try {
       // tell server we're logging out
       const response = await window.fetch(getters.endpoints.logout, {
+        method: 'POST',
         headers: {
           Authorization: 'Bearer ' + getters.jwt
         }
