@@ -35,7 +35,8 @@ module.exports = merge(baseWebpackConfig, {
       title: 'dCloud Collaboration Toolbox',
       template: 'index.html',
       inject: true,
-      favicon: 'client/assets/logo.png'
+      favicon: 'client/assets/logo.png',
+      environment: 'development'
     })
   ]
 })
