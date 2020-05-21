@@ -5,11 +5,11 @@
       <!-- loading indicator -->
       <b-loading
       :is-full-page="true"
-      :active="!authCheckDone"
+      :active="links.length === 0"
       :can-cancel="false"></b-loading>
 
       <!-- main content -->
-      <div v-if="isAuthenticated">
+      <div v-if="links.length > 0">
         <navbar :show="true"></navbar>
         <section class="app-main">
           <div class="container is-fluid is-marginless app-content">
@@ -107,7 +107,8 @@ export default {
     ...mapActions([
       'checkLogin',
       'setJwt',
-      'getApiVersion'
+      'getApiVersion',
+      'getLinks'
     ]),
     async authCheck () {
       try {
@@ -144,9 +145,10 @@ export default {
     }
   },
 
-  mounted () {
+  async mounted () {
     this.getApiVersion()
-    this.authCheck()
+    await this.authCheck()
+    this.getLinks()
     // set up alternator to flip between true and false every second
     setInterval(() => {
       this.alternator = !this.alternator
@@ -162,93 +164,11 @@ export default {
       'isProduction',
       'datacenter',
       'uiVersion',
-      'authApiVersion'
+      'authApiVersion',
+      'links'
     ]),
     flashing () {
       return this.alternator ? 'is-default' : 'is-primary'
-    },
-    links () {
-      return this.allLinks.filter(v => {
-        // always show all common links
-        if (v.tags.includes('common')) {
-          return true
-        }
-        // remove cxdemo links from dcloud domain viewers
-        if (this.isDcloud && v.tags.includes('cxdemo')) {
-          return false
-        }
-        // show all links to admins and users in QA group
-        if (this.user.admin || (this.user.groups && this.user.groups.includes('QA'))) {
-          return true
-        }
-        // normal user sees all links, minus development links
-        return !v.tags.includes('development')
-      })
-    },
-    allLinks () {
-      const ret = []
-      ret.push({
-        href: '/customer',
-        text: 'Customer Profiles',
-        tags: ['common']
-      })
-      ret.push({
-        href: '/branding',
-        text: 'Demo Branding',
-        tags: ['common']
-      })
-      ret.push({
-        href: '/pcce',
-        text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo',
-        tags: ['dcloud']
-      })
-      ret.push({
-        href: '/pcce-12-0',
-        text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
-        tags: ['dcloud', 'new']
-      })
-      ret.push({
-        href: '/uccx',
-        text: 'Unified Contact Center Express 12.0v2 Instant Demo',
-        tags: ['dcloud']
-      })
-      ret.push({
-        href: '/cwcc',
-        text: 'Webex Contact Center v2 Instant Demo',
-        tags: ['dcloud']
-      })
-      ret.push({
-        href: '/webex-v3prod',
-        text: 'Webex Contact Center v3 Instant Demo',
-        tags: ['dcloud', 'new', 'development']
-      })
-      ret.push({
-        href: '/wxm',
-        text: 'Webex Experience Management v1 Instant Demo',
-        tags: ['dcloud', 'new']
-      })
-      ret.push({
-        href: '/chat',
-        text: 'Facebook & SMS Entry Points',
-        tags: ['cxdemo']
-      })
-      ret.push({
-        href: '/cjp-ccone',
-        text: 'CJP CCOne Demo',
-        tags: ['cxdemo']
-      })
-      ret.push({
-        href: '/cjp-webex',
-        text: 'CJP Webex Demo',
-        tags: ['cxdemo']
-      })
-      ret.push({
-        href: '/cwcc-tsa',
-        text: 'CWCC TSA Demo',
-        tags: ['cxdemo']
-      })
-
-      return ret
     }
   },
 

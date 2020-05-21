@@ -7,10 +7,12 @@ import modules from './modules'
 Vue.use(Vuex)
 
 // production url
-let baseUrl = '/api/v1/auth'
+let baseUrl = window.location.origin + '/api/v1/auth'
 if (process.env.NODE_ENV !== 'production') {
   // dev environment url
   baseUrl = 'http://localhost:3032/api/v1/auth'
+  // production environment url
+  // baseUrl = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth'
 }
 
 const store = new Vuex.Store({
@@ -23,7 +25,8 @@ const store = new Vuex.Store({
     endpoints: {
       logout: baseUrl + '/logout',
       authCheck: baseUrl + '/check',
-      version: baseUrl + '/version'
+      version: baseUrl + '/version',
+      links: baseUrl + '/landing/link'
     }
   }
 })

@@ -15,7 +15,8 @@ const getters = {
   isAuthenticated: state => state.jwt !== null,
   forwardTo: state => state.forwardTo,
   authApiVersion: state => state.authApiVersion,
-  uiVersion: () => pkg.version
+  uiVersion: () => pkg.version,
+  links: state => state.links
 }
 
 const state = {
@@ -33,7 +34,8 @@ const state = {
   user: {},
   jwt: null,
   forwardTo: null,
-  authApiVersion: 'loading...'
+  authApiVersion: 'loading...',
+  links: []
 }
 
 const mutations = {
@@ -74,10 +76,44 @@ const mutations = {
 
   [types.SET_VERSION] (state, data) {
     state.authApiVersion = data.version
+  },
+
+  [types.SET_LINKS] (state, data) {
+    state.links = data
   }
 }
 
 const actions = {
+  async getLinks ({getters, dispatch, commit}) {
+    const operation = 'links'
+    console.log('getting', operation, '...')
+    // dispatch('setLoading', {group: 'app', type: 'links', value: true})
+    try {
+      const endpoint = getters.endpoints.links
+      console.log('getting', operation, 'endpoint', endpoint, '...')
+      // get REST data
+      const response = await window.fetch(endpoint, {
+        headers: {
+          Authorization: 'Bearer ' + getters.jwt
+        }
+      })
+      const text = await response.text()
+      if (response.ok) {
+        // parse response
+        const data = JSON.parse(text)
+        // put in state
+        commit(types.SET_LINKS, data)
+        console.log('get', operation, '- response:', data)
+      } else {
+        console.log('get', operation, '- failed:', response.status, response.statusText, text)
+      }
+    } catch (e) {
+      console.log('error getting', operation, e)
+      // dispatch('errorNotification', {title: 'Failed to get ' + operation, error: e})
+    } finally {
+      // dispatch('setLoading', {group: 'app', type: 'links', value: false})
+    }
+  },
   async getApiVersion ({getters, dispatch, commit}) {
     // dispatch('setLoading', {group: 'app', type: 'authApiInfo', value: true})
     const operation = 'auth API version'
