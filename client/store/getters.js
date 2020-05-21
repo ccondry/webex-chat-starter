@@ -16,7 +16,10 @@ export const domain = function (state) {
     // get current hostname of the browser location
     const hostname = window.location.hostname
     // console.log('hostname', hostname)
-
+    if (hostname === 'localhost') {
+      // default to cisco in development
+      return 'cisco'
+    }
     // split FQDN into parts
     const parts = hostname.split('.')
 
