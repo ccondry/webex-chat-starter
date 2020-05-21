@@ -225,7 +225,7 @@ export default {
       ret.push({
         href: '/wxm',
         text: 'Webex Experience Management v1 Instant Demo',
-        tags: ['dcloud', 'new', 'development']
+        tags: ['dcloud', 'new']
       })
       ret.push({
         href: '/chat',
