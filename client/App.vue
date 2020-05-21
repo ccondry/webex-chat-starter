@@ -35,7 +35,7 @@
                             <span v-else>
                               {{ link.text }}
                             </span>
-                            <b-tag v-if="link.isNew" :type="flashing">New</b-tag>
+                            <b-tag v-if="link.tags.includes('new')" :type="flashing">New</b-tag>
                           </li>
                         </ul>
                       </div>
@@ -147,7 +147,7 @@ export default {
   mounted () {
     this.getApiVersion()
     this.authCheck()
-    // set up alternator to flip between true and false every 1/2 second
+    // set up alternator to flip between true and false every second
     setInterval(() => {
       this.alternator = !this.alternator
     }, 1000)
@@ -168,85 +168,85 @@ export default {
       return this.alternator ? 'is-default' : 'is-primary'
     },
     links () {
-      if (this.user.admin || (this.user.groups && this.user.groups.includes('QA'))) {
-        // admin sees all
-        // show QA users the development links too
-        return this.allLinks
-      } else {
-        // user sees all links, minus admin-only links
-        return this.allLinks.filter(v => !v.isDevelopment)
-      }
+      return this.allLinks.filter(v => {
+        // always show all common links
+        if (v.tags.includes('common')) {
+          return true
+        }
+        // remove cxdemo links from dcloud domain viewers
+        if (this.isDcloud && v.tags.includes('cxdemo')) {
+          return false
+        }
+        // show all links to admins and users in QA group
+        if (this.user.admin || (this.user.groups && this.user.groups.includes('QA'))) {
+          return true
+        }
+        // normal user sees all links, minus development links
+        return !v.tags.includes('development')
+      })
     },
     allLinks () {
       const ret = []
-      // for everyone
       ret.push({
         href: '/customer',
-        text: 'Customer Profiles'
+        text: 'Customer Profiles',
+        tags: ['common']
       })
       ret.push({
         href: '/branding',
-        text: 'Demo Branding'
+        text: 'Demo Branding',
+        tags: ['common']
       })
-
-      // for dcloud domains, or admins using the cxdemo domain
-      if (this.isDcloud || this.user.admin) {
-        ret.push({
-          href: '/pcce',
-          text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo'
-        })
-        ret.push({
-          href: '/pcce-12-0',
-          text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
-          isNew: true
-        })
-        ret.push({
-          href: '/uccx',
-          text: 'Unified Contact Center Express 12.0v2 Instant Demo'
-        })
-        ret.push({
-          href: '/cwcc',
-          text: 'Webex Contact Center v2 Instant Demo'
-        })
-      }
-      if (this.isDcloud || this.user.admin || (this.user.groups && this.user.groups.includes('QA'))) {
-        ret.push({
-          href: '/webex-v3prod',
-          text: 'Webex Contact Center v3 Instant Demo',
-          isNew: true,
-          isDevelopment: true
-        })
-        ret.push({
-          href: '/wxm',
-          text: 'Webex Experience Management v1 Instant Demo',
-          isNew: true,
-          isDevelopment: true
-        })
-      }
-      // for cxdemo domain
-      if (this.isCxdemo) {
-        // ret.push({
-        //   href: '/webex-v3prod',
-        //   text: 'Webex Contact Center v3 Instant Demo',
-        //   isNew: true
-        // })
-        ret.push({
-          href: '/chat',
-          text: 'Facebook & SMS Entry Points'
-        })
-        ret.push({
-          href: '/cjp-ccone',
-          text: 'CJP CCOne Demo'
-        })
-        ret.push({
-          href: '/cjp-webex',
-          text: 'CJP Webex Demo'
-        })
-        ret.push({
-          href: '/cwcc-tsa',
-          text: 'CWCC TSA Demo'
-        })
-      }
+      ret.push({
+        href: '/pcce',
+        text: 'Packaged Contact Center Enterprise 11.6v3 Instant Demo',
+        tags: ['dcloud']
+      })
+      ret.push({
+        href: '/pcce-12-0',
+        text: 'Packaged Contact Center Enterprise 12.0v2 Instant Demo',
+        tags: ['dcloud', 'new']
+      })
+      ret.push({
+        href: '/uccx',
+        text: 'Unified Contact Center Express 12.0v2 Instant Demo',
+        tags: ['dcloud']
+      })
+      ret.push({
+        href: '/cwcc',
+        text: 'Webex Contact Center v2 Instant Demo',
+        tags: ['dcloud']
+      })
+      ret.push({
+        href: '/webex-v3prod',
+        text: 'Webex Contact Center v3 Instant Demo',
+        tags: ['dcloud', 'new', 'development']
+      })
+      ret.push({
+        href: '/wxm',
+        text: 'Webex Experience Management v1 Instant Demo',
+        tags: ['dcloud', 'new', 'development']
+      })
+      ret.push({
+        href: '/chat',
+        text: 'Facebook & SMS Entry Points',
+        tags: ['cxdemo']
+      })
+      ret.push({
+        href: '/cjp-ccone',
+        text: 'CJP CCOne Demo',
+        tags: ['cxdemo']
+      })
+      ret.push({
+        href: '/cjp-webex',
+        text: 'CJP Webex Demo',
+        tags: ['cxdemo']
+      })
+      ret.push({
+        href: '/cwcc-tsa',
+        text: 'CWCC TSA Demo',
+        tags: ['cxdemo']
+      })
 
       return ret
     }
