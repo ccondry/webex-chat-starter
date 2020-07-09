@@ -25,7 +25,7 @@
                   </div>
                   <div class="tile is-parent is-6">
                     <article class="tile is-child box">
-                      <h1 class="title">dCloud Collaboration Toolbox</h1>
+                      <h1 class="title">dCloud Collaboration Toolbox - Instant Demos</h1>
                       <div class="content">
                         <ul>
                           <li v-for="(link, index) of links" :key="index">
