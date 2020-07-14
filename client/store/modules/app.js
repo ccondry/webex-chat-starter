@@ -218,7 +218,7 @@ const actions = {
           if (json.jwt) {
             // switch-user was active - logging back in as previous user
             // store new auth token in localStorage
-            dispatch('setJwt', response.data.jwt)
+            dispatch('setJwt', json.jwt)
             // load user data using JWT
             // dispatch('loadUser')
             dispatch('successNotification', `Successfully logged out of ${getters.user.username}`)
