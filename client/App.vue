@@ -117,6 +117,15 @@ export default {
         await this.checkLogin()
         console.log('checking login done.')
         this.authCheckDone = true
+        if (!this.user.id) {
+          // user does not have a user ID set yet. Forward them back to login
+          if (this.isProduction) {
+            window.location = '/auth/login?destination=' + window.location
+          } else {
+            // development - pop alert
+            this.$buefy.dialog.prompt(`Hey, you don't have a user ID set yet.`)
+          }
+        }
         if (this.isAuthenticated === false) {
           // user is not authenticated - send them to login
           if (this.isProduction) {
