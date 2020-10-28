@@ -13,7 +13,7 @@
     >
       <strong>{{ title }}</strong>
     </div>
-    <div class="panel-block box">
+    <div class="panel-block" style="background-color: white;">
       <slot />
     </div>
   </b-collapse>

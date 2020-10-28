@@ -11,30 +11,42 @@
     class="container is-fluid is-marginless app-content"
     >
       <section class="main">
-          <welcome />
-          <link-group
-          :links="commonLinks"
-          title="Tools"
-          aria-id="tools"
-          />
-          <link-group
-          v-if="dcloudLinks.length"
-          :links="dcloudLinks"
-          title="Instant Demos"
-          aria-id="instant-demos"
-          />
-          <link-group
-          v-if="cxdemoLinks.length"
-          :links="cxdemoLinks"
-          title="Other Demos"
-          aria-id="other-demos"
-          />
-          <link-group
-          v-if="qaLinks.length"
-          :links="qaLinks"
-          title="QA Testing"
-          aria-id="qa"
-          />
+        <!-- welcome -->
+        <welcome />
+
+        <!-- common links -->
+        <link-group
+        :links="commonLinks"
+        title="Tools"
+        aria-id="tools"
+        />
+
+        <!-- dcloud demos -->
+        <link-group
+        v-if="dcloudLinks.length"
+        :links="dcloudLinks"
+        title="Instant Demos"
+        aria-id="instant-demos"
+        />
+
+        <!-- cxdemo demos -->
+        <link-group
+        v-if="cxdemoLinks.length"
+        :links="cxdemoLinks"
+        title="Other Demos"
+        aria-id="other-demos"
+        />
+
+        <!-- QA -->
+        <link-group
+        v-if="qaLinks.length"
+        :links="qaLinks"
+        title="QA Testing"
+        aria-id="qa"
+        />
+
+        <!-- Copyright and version footer -->
+        <app-footer style="margin-bottom: 1rem;" />
       </section>
     </div>
   </div>
@@ -45,12 +57,14 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import Navbar from './components/navbar'
 import LinkGroup from './components/link-group'
 import Welcome from './components/welcome'
+import AppFooter from './components/app-footer'
 
 export default {
   components: {
     Navbar,
     LinkGroup,
-    Welcome
+    Welcome,
+    AppFooter
   },
 
   computed: {
@@ -138,6 +152,17 @@ section.main > div {
   // padding-bottom: 1rem;
 }
 
-// give content panels a grey border and darker box shadow
+// blinking for "new" tag
+.blinking{
+  animation: blinkingText 2s infinite;
+}
+
+@keyframes blinkingText{
+  0% { background-color: currentColor; }
+  49% { background-color: currentColor; }
+  60% { background-color: transparent; }
+  99% { background-color: transparent; }
+  100% { background-color: currentColor; }
+}
 
 </style>

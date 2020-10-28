@@ -2,7 +2,17 @@
   <panel :title="title" :aria-id="ariaId">
     <ul>
       <li v-for="link of links" :key="link._id">
-        <strong><a :href="link.href">{{ link.text }}</a></strong>
+        <strong>
+          <a :href="link.href">{{ link.text }}</a>
+          <b-tag
+          v-if="link.tags && link.tags.includes('new')"
+          style="margin-left: 0.5rem;"
+          class="blinking"
+          type="is-info"
+          >
+            New
+          </b-tag>
+        </strong>
       </li>
     </ul>
   </panel>
@@ -18,7 +28,8 @@ export default {
       default: ''
     },
     ariaId: {
-      type: String
+      type: String,
+      default: ''
     },
     links: {
       required: true,
