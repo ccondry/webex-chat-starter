@@ -1,6 +1,6 @@
 # toolbox-landing-ui Change Log
 
-Version numbers are dates in semver-compatible YYYY.MM.DD-X format,
+Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 # 2020.10.22

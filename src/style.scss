@@ -1,0 +1,87 @@
+// import cisco fonts from momentum-ui
+$brand-font-folder: '~@momentum-ui/core/fonts';
+@import '~@momentum-ui/core/scss/typography/mixins.scss';
+
+// import momentum-ui color variables
+// @import '~@momentum-ui/core/scss/colors/settings-base.scss';
+@import './momentum-colors.scss';
+
+// set fonts in bulma
+$family-primary: "CiscoSansTT Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// set bulma colors using momentum-ui colors
+$info: $md-purple-50;
+$danger: $md-red-50;
+$warning: $md-yellow-50;
+$success: $md-green-50;
+$primary: $md-blue-50;
+
+// darken the buttons more on hover and click
+// this matches the momentum-ui code pretty closely
+$button-darken-full: 17%;
+$button-darken-half: 9%;
+
+// lighten up the modal/dialog background color
+$modal-background-background-color: rgba(0, 0, 0, 0.45);
+
+// set links to the primary color
+$link: $primary;
+
+// import bulma source
+@import "~bulma";
+
+// import '~buefy/dist/buefy.css';
+// import buefy source
+@import "~buefy/src/scss/buefy";
+
+$mdi-font-path: '~@mdi/font/fonts';
+// import material design icons
+@import "~@mdi/font/scss/materialdesignicons.scss";
+
+// set buefy b-tag font to regular instead of light
+span.tag {
+  font-family: "CiscoSansTT Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+// increase box-shadow on modals and boxes
+.modal-card {
+  box-shadow: 0 2rem 1rem rgba(0,0,0,.2);
+}
+
+// // add a border for modals and boxes
+// .modal-card-body {
+//   border-left: 1px solid rgb(204, 204, 204);
+//   border-right: 1px solid rgb(204, 204, 204);
+// }
+
+// .modal-card-body.is-titleless {
+//   border-top: 1px solid rgb(204, 204, 204);
+// }
+
+// // add a border for modals and boxes
+// .modal-card-head {
+//   border-top: 1px solid rgb(204, 204, 204);
+//   border-left: 1px solid rgb(204, 204, 204);
+//   border-right: 1px solid rgb(204, 204, 204);
+// }
+
+// .modal-card-foot {
+//   border-bottom: 1px solid rgb(204, 204, 204);
+//   border-left: 1px solid rgb(204, 204, 204);
+//   border-right: 1px solid rgb(204, 204, 204);
+// }
+// .panel-block {
+//   border-bottom: 1px solid rgb(204, 204, 204);
+//   border-left: 1px solid rgb(204, 204, 204);
+//   border-right: 1px solid rgb(204, 204, 204);
+// }
+
+// add thin grey border around collapse panels
+// and increase their box shadow
+div.collapse.panel {
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.box {
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
+}

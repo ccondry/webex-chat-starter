@@ -1,19 +1,22 @@
 #!/bin/sh
-# build and install the application into www files
-echo "running npm install"
-npm i
+echo "running yarn"
+yarn
 if [ $? -eq 0 ]; then
-  echo "running npm run build..."
-  npm run build
+  echo "running yarn build..."
+  yarn build
+  while [ $? != 0 ]
+  do
+    echo "failed to build toolbox-landing-ui website files. trying again..."
+    yarn build
+  done
+  echo "yarn build successful. copying dist files to www folder..."
+  mkdir -p /var/www/toolbox/landing
+  cp -rf dist/* /var/www/toolbox/landing/
   if [ $? -eq 0 ]; then
-    echo "npm build successful"
-    echo "making web files directory"
-    mkdir -p /var/www/toolbox/landing
-    echo "copying new web files"
-    cp -rf dist/* /var/www/toolbox/landing/
+    echo "successfully installed toolbox-landing-ui website files"
   else
-    echo "npm failed to run build script"
+    echo "failed to install toolbox-landing-ui website files"
   fi
 else
-  echo "failed npm install"
+  echo "yarn failed"
 fi
