@@ -2,17 +2,15 @@
   <panel :title="title" :aria-id="ariaId">
     <ul>
       <li v-for="link of links" :key="link._id">
-        <strong>
-          <a :href="link.href">{{ link.text }}</a>
-          <b-tag
-          v-if="link.tags && link.tags.includes('new')"
-          style="margin-left: 0.5rem;"
-          class="blinking"
-          type="is-info"
-          >
-            New
-          </b-tag>
-        </strong>
+        <a :href="link.href">{{ link.text }}</a>
+        <b-tag
+        v-if="link.tags && link.tags.includes('new')"
+        style="margin-left: 0.5rem;"
+        class="blinking"
+        type="is-info"
+        >
+          New
+        </b-tag>
       </li>
     </ul>
   </panel>
