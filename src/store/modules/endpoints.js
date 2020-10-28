@@ -11,7 +11,7 @@ const getters = {
     }
 
     return {
-      webex: authUrlBase + '/resource/joinUccxSupportRoom',
+      webex: authUrlBase + '/resource/joinGeneralSupportRoom',
       version: authUrlBase + '/version',
       links: authUrlBase + '/landing/link',
       logout: authUrlBase + '/logout'
