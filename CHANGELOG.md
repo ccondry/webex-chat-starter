@@ -3,6 +3,12 @@
 Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
+# 2020.10.28-3
+
+### Bug Fixes
+* **Logout:** Fix logout button
+
+
 # 2020.10.28-2
 
 ### Features
