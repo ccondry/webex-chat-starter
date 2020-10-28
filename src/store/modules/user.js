@@ -78,8 +78,8 @@ const actions = {
         // save new JWT
         dispatch('setJwt', response.jwt)
       } else {
-        // make user log in again
-        dispatch('login')
+        // remove JWT
+        dispatch('unsetJwt')
       }
     } catch (e) {
       console.log(e)
