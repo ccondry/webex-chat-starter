@@ -1,7 +1,9 @@
 // import cisco fonts from momentum-ui
 $brand-font-folder: '~@momentum-ui/core/fonts';
+@import '~@momentum-ui/core/scss/tools/functions/core.scss';
 @import '~@momentum-ui/core/scss/typography/mixins.scss';
-
+// import font
+@include brand-font-faces;
 // import momentum-ui color variables
 // @import '~@momentum-ui/core/scss/colors/settings-base.scss';
 @import './momentum-colors.scss';
