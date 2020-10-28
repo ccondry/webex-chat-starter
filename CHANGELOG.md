@@ -3,6 +3,12 @@
 Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
+# 2020.10.28-1
+
+### Features
+* **Admin:** add admin button to link to management-ui
+
+
 # 2020.10.28
 
 ### Features
