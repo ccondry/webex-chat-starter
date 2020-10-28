@@ -1,6 +1,6 @@
 <template>
-    <div style="display: flex; flex-direction: column; align-items: center; padding-top: 1rem;">
   <panel aria-id="version-copyright" style="border-radius: 6px;">
+    <div style="display: flex; flex-direction: column; align-items: center; ">
       <cisco-logo style="width: 4rem; height: 4rem;" />
       <small> 
         UI Version {{ uiVersion }}
