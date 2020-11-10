@@ -1,8 +1,8 @@
 #!/bin/sh
-echo "removing toolbox-landing-ui website files..."
-rm -rf /var/www/toolbox/landing/*
+echo "removing webex-v4-toolbox-ui website files..."
+rm -rf /var/www/toolbox/webex-v4/*
 if [ $? -eq 0 ]; then
-  echo "successfully removed toolbox-landing-ui website files."
+  echo "successfully removed webex-v4-toolbox-ui website files."
 else
-  echo "failed to remove toolbox-landing-ui website files."
+  echo "failed to remove webex-v4-toolbox-ui website files."
 fi

@@ -1,7 +1,7 @@
 {
-  "name": "toolbox-landing-ui",
+  "name": "webex-v4-toolbox-ui",
   "description": "Landing page for the dCloud Collaboration Toolbox",
-  "version": "2020.10.28-3",
+  "version": "2020.11.10",
   "author": "Coty Condry <ccondry@cisco.com>",
   "main": "dist/js/index.common.js",
   "unpkg": "dist/js/index.js",
@@ -30,10 +30,10 @@
   "homepage": "https://dcloud-collab-toolbox-rtp.cisco.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ccondry/toolbox-landing-ui"
+    "url": "https://github.com/ccondry/webex-v4-toolbox-ui"
   },
   "bugs": {
-    "url": "https://github.com/ccondry/toolbox-landing-ui/issues"
+    "url": "https://github.com/ccondry/webex-v4-toolbox-ui/issues"
   },
   "license": "MIT",
   "dependencies": {
