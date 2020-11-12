@@ -26,6 +26,9 @@
         <!-- Reprovision -->
         <reprovision v-if="isProvisioned" />
 
+        <!-- Admin -->
+        <admin v-if="isAdmin || isAdminSu" />
+
         <!-- debug info -->
         <debug v-if="!isProduction" />
 
@@ -46,6 +49,7 @@ import DemoWebsite from './components/demo-website'
 import Reprovision from './components/reprovision'
 import AppFooter from './components/app-footer'
 import Debug from './components/debug'
+import Admin from './components/admin'
 
 export default {
   components: {
@@ -56,19 +60,21 @@ export default {
     DemoWebsite,
     Reprovision,
     AppFooter,
-    Debug
+    Debug,
+    Admin
   },
 
   computed: {
     ...mapGetters([
       'isLoggedIn',
       'isAdmin',
+      'isAdminSu',
       'jwtUser',
       'loading',
       'working',
       'isProvisioned',
       'isProduction',
-      'demoUserConfig'
+      'userDemoConfig'
     ]),
     isLoading () {
       return this.loading.app.environment ||

@@ -25,8 +25,8 @@
           v-if="isAdmin"
           type="is-info"
           rounded
-          @click="clickAdmin"
           aria-label="Admin"
+          @click="clickAdmin"
           >
             Admin
           </b-button>
@@ -34,8 +34,8 @@
           <b-button
           type="is-info"
           rounded
-          @click="clickLogout"
           aria-label="Log Out"
+          @click="clickLogout"
           >
             Log Out
           </b-button>

@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-// import {addUrlQueryParams} from '../../utils'
+import {addUrlQueryParams} from '../../utils'
 
 const state = {
   verticals: [],
@@ -20,26 +20,13 @@ const getters = {
     return getters.demoBaseConfig.locked === true
   },
   verticals: state => state.verticals,
-  datacenter: (state, getters) => {
-    if (getters.isProduction) {
-      // get current hostname of the browser location
-      const hostname = window.location.hostname
-      // get the part before ".cisco.com"
-      const part1 = hostname.split('.').shift()
-      // get the datacenter part
-      return part1.split('-').pop().toUpperCase()
-    } else {
-      // development
-      return 'RTP'
-    }
+  brandDemoLink (state, getters) {
+    return addUrlQueryParams('https://mm-brand.cxdemo.net', {
+      session: 'webex-v4prod',
+      datacenter: 'CLOUD',
+      userId: getters.jwtUser.id
+    })
   },
-  // brandDemoLink (state, getters) {
-  //   return addUrlQueryParams('https://mm-brand.cxdemo.net', {
-  //     session: getters.instance.session,
-  //     datacenter: getters.instance.datacenter,
-  //     userId: getters.jwtUser.id
-  //   })
-  // },
   demoBaseConfig: state => state.demoBaseConfig
 }
 

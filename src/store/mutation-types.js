@@ -15,3 +15,5 @@ export const SET_LINKS = 'SET_LINKS'
 
 // user demo provision / config info
 export const SET_PROVISION = 'SET_PROVISION'
+// demo verticals list
+export const SET_VERTICALS = 'SET_VERTICALS'

@@ -7,25 +7,29 @@
     <p>
       Would you like to provision again anyway?
     </p>
-    <div class="buttons" style="justify-content: space-around;">
+    <b-field>
       <b-button
       :disabled="working.user.provision"
-      type="is-success"
+      type="is-primary"
       rounded
+      expanded
       @click.prevent="clickProvision"
       >
         {{ buttonText }}
       </b-button>
+    </b-field>
 
+    <b-field>
       <b-button
       :disabled="working.user.provision"
       type="is-danger"
       rounded
+      expanded
       @click.prevent="clickDeprovision"
       >
         Delete Account
       </b-button>
-    </div>
+    </b-field>
   </panel>
 </template>
 

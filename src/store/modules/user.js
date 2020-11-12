@@ -26,7 +26,7 @@ const mutations = {
 }
 
 const getters = {
-  demoUserConfig: state => state.demoConfig,
+  userDemoConfig: state => state.demoConfig,
   isAdminSu: (state, getters) => {
     try {
       return getters.jwtUser.suJwt
@@ -57,7 +57,7 @@ const getters = {
     }
   },
   isProvisioned: (state, getters) => {
-    return Object.keys(getters.demoUserConfig).length > 0
+    return Object.keys(getters.userDemoConfig).length > 0
   }
 }
 
@@ -140,7 +140,7 @@ const actions = {
       mutation: types.SET_PROVISION
     })
   },
-  saveDemoUserConfig ({dispatch, getters}, body) {
+  saveUserDemoConfig ({dispatch, getters}, body) {
     dispatch('fetch', {
       group: 'user',
       type: 'demoConfig',

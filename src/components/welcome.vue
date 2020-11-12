@@ -6,17 +6,16 @@
       Join our Webex Teams support room to get help, ask questions, and
       suggest new features:
     </p>
-    <div class="buttons" style="justify-content: space-around;">
-      <b-field>
-        <b-button
-        type="is-primary"
-        rounded
-        @click="clickJoinSupportRoom"
-        >
-          Join Support Room
-        </b-button>
-      </b-field>
-    </div>
+    <b-field>
+      <b-button
+      type="is-primary"
+      rounded
+      expanded
+      @click="clickJoinSupportRoom"
+      >
+        Join Support Room
+      </b-button>
+    </b-field>
   </panel>
 </template>
 

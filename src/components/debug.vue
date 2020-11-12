@@ -1,6 +1,6 @@
 <template>
   <panel title="Debug" aria-id="debug">
-    <pre>{{ demoUserConfig }}</pre>
+    <pre>{{ userDemoConfig }}</pre>
   </panel>
 </template>
 
@@ -10,7 +10,7 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'demoUserConfig'
+      'userDemoConfig'
     ])
   }
 }

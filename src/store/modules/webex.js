@@ -1,5 +1,17 @@
 import {ToastProgrammatic as Toast} from 'buefy/src'
 
+const state = {
+  agentPortalUrl: 'https://agent.cjp.cisco.com/ada-ws/home',
+  webexAdminPortalUrl: 'https://admin.webex.com/overview',
+  cjpAdminPortalUrl: 'https://portal.cjp.cisco.com/portal/home'
+}
+
+const getters = {
+  agentPortalUrl: state => state.agentPortalUrl,
+  webexAdminPortalUrl: state => state.webexAdminPortalUrl,
+  cjpAdminPortalUrl: state => state.cjpAdminPortalUrl,
+}
+
 const actions = {
   async joinSupportRoom ({dispatch, getters}, email) {
     try {
@@ -23,5 +35,7 @@ const actions = {
 }
 
 module.exports = {
-  actions
+  actions,
+  getters,
+  state
 }

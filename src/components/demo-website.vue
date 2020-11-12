@@ -7,45 +7,32 @@
         show the customer side of the demo.
       </p>
       <b-field>
-        <b-field style="margin-right: 1em;">
-          <b-select 
-          v-model="vertical" 
-          :disabled="working.app.user"
-          @change.native="verticalChanged" 
+        <b-select 
+        v-model="vertical" 
+        :disabled="working.app.user"
+        @change.native="verticalChanged" 
+        >
+          <option :value="null" disabled selected>
+            Choose Your Demo Vertical
+          </option>
+          <option
+          v-for="(brand, index) in systemBrands" 
+          :key="'system' + index"
+          :value="brand.id"
           >
-            <option :value="null" disabled selected>
-              Choose Your Demo Vertical
-            </option>
-            <option
-            v-for="(brand, index) in systemBrands" 
-            :key="'system' + index"
-            :value="brand.id"
-            >
-              {{ `${brand.name} (${brand.id})` }}
-            </option>
-            <option disabled>
-              -----------------------------------------
-            </option>
-            <option
-            v-for="(brand, index) in otherBrands"
-            :key="'other' + index"
-            :value="brand.id"
-            >
-              {{ `${brand.name} (${brand.id})` }}
-            </option>
-          </b-select>
-        </b-field>
-
-        <b-field>
-          <b-button
-          type="is-success"
-          rounded
-          :disabled="working.app.user"
-          @click="clickGo"
+            {{ `${brand.name} (${brand.id})` }}
+          </option>
+          <option disabled>
+            -----------------------------------------
+          </option>
+          <option
+          v-for="(brand, index) in otherBrands"
+          :key="'other' + index"
+          :value="brand.id"
           >
-            Go to Demo Website
-          </b-button>
-        </b-field>
+            {{ `${brand.name} (${brand.id})` }}
+          </option>
+        </b-select>
       </b-field>
       
       <b-field>
@@ -102,6 +89,18 @@
           <strong>Demo Branding Toolbox</strong>
         </a>.
       </p>
+
+      <b-field v-if="!isLocked">
+        <b-button
+        :disabled="working.app.user"
+        type="is-success"
+        rounded
+        expanded
+        @click="clickGo"
+        >
+          Go to Demo Website
+        </b-button>
+      </b-field>
     </div>
   </panel>
 </template>
@@ -126,7 +125,7 @@ export default {
       'working',
       'brandDemoLink',
       'cumulusDemoLink',
-      'demoUserConfig',
+      'userDemoConfig',
       'isAdmin',
       'loading',
       'jwtUser'
@@ -205,7 +204,7 @@ export default {
       // console.log('this.sortedbrands.length = ', this.sortedBrands.length)
       this.updateSelection()
     },
-    demoUserConfig (val) {
+    userDemoConfig (val) {
       console.log('demo user config changed:', val)
       this.updateCache()
     },
@@ -225,11 +224,11 @@ export default {
     updateCache () {
       try {
         // copy vertical selection to the one in demo config
-        this.vertical = this.demoUserConfig.vertical
+        this.vertical = this.userDemoConfig.vertical
         // copy multichannel selection option from demo config value
-        this.multichannel = this.demoUserConfig.multichannel
+        this.multichannel = this.userDemoConfig.multichannel
       } catch (e) {
-        // continue - this.demoUserConfig is probably not ready yet
+        // continue - this.userDemoConfig is probably not ready yet
       }
     },
     updateSelection () {
