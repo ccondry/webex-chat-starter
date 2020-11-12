@@ -19,7 +19,7 @@ const webpackConfig = {
   entry: './src/main.js',
   output: {
     path: path.resolve(process.cwd(), './dist/'),
-    publicPath: '/webex-v4prod/',
+    publicPath: '/webex-v4/',
     filename: isProd ? 'js/[name].[hash:7].js' : 'js/[name].js',
     chunkFilename: isProd ? 'js/[name].[hash:7].js' : 'js/[name].js',
   },
@@ -35,7 +35,7 @@ const webpackConfig = {
     // overlay: true,
     host: 'localhost',
     port: 5005,
-    openPage: 'webex-v4prod/',
+    openPage: 'webex-v4/',
     hot: true,
     // historyApiFallback: {
     //   index: '/'

@@ -101,7 +101,7 @@ export default {
     this.getApiVersion()
     // get the Authentication REST API version
     this.getAuthApiVersion()
-    // get the demo base configuration for webex-v4prod
+    // get the demo base configuration for webex-v4
     this.getDemoBaseConfig()
     // get demo verticals list
     this.getVerticals()

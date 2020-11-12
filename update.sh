@@ -24,9 +24,9 @@ else
       yarn build
       if [ $? -eq 0 ]; then
         echo "yarn build successful. removing old www files..."
-        rm -rf /var/www/toolbox/webex-v4prod/*
+        rm -rf /var/www/toolbox/webex-v4/*
         echo "copying dist files to www folder..."
-        cp -rf dist/* /var/www/toolbox/webex-v4prod/
+        cp -rf dist/* /var/www/toolbox/webex-v4/
         if [ $? -eq 0 ]; then
           echo "successfully installed webex-v4-toolbox-ui website files"
         else

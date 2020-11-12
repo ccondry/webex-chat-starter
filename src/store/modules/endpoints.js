@@ -7,11 +7,11 @@ const getters = {
     if (getters.isProduction) {
       // production
       authUrlBase = '/api/v1/auth'
-      urlBase = '/api/v1/webex-v4prod'
+      urlBase = 'https://dcloud-collab-toolbox.cxdemo.net/api/v1/webex-v4'
     } else {
       // development
       authUrlBase = 'http://localhost:3032/api/v1/auth'
-      urlBase = 'http://localhost:4005/api/v1/webex-v4prod'
+      urlBase = 'http://localhost:4005/api/v1/webex-v4'
     }
 
     return {

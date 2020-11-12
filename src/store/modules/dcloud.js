@@ -22,7 +22,7 @@ const getters = {
   verticals: state => state.verticals,
   brandDemoLink (state, getters) {
     return addUrlQueryParams('https://mm-brand.cxdemo.net', {
-      session: 'webex-v4prod',
+      session: 'webex-v4',
       datacenter: 'CLOUD',
       userId: getters.jwtUser.id
     })
