@@ -1,6 +1,6 @@
-# landing-ui-toolbox-ui
-The dCloud GoCMS web portal UI project. It is built on Momentum-UI and
-Vue.js 2.6 (including vue-router and vuex), using Webpack 4.
+# webex-v4-toolbox-ui
+The dCloud Webex Contact Center v4 Instant Demo web portal UI project. It is
+built on Vue.js 2.6 (including vue-router and vuex), using Webpack 4.
 
 ## Development
 ### Usage
@@ -20,4 +20,4 @@ opening your browser javascript console and entering `localStorage.jwt`.
 
 ## Production
 ### Installation
-`./install.sh` to build and install to the /var/www/html folder
+`./install.sh` to build and install to the /var/www/toolbox/webex-v4 folder
