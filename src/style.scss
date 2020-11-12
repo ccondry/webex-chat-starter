@@ -1,15 +1,16 @@
 // import cisco fonts from momentum-ui
-$brand-font-folder: '~@momentum-ui/core/fonts';
-@import '~@momentum-ui/core/scss/tools/functions/core.scss';
-@import '~@momentum-ui/core/scss/typography/mixins.scss';
+// $brand-font-folder: '~@momentum-ui/core/fonts';
+// @import '~@momentum-ui/core/scss/tools/functions/core.scss';
+// @import '~@momentum-ui/core/scss/typography/mixins.scss';
 // import font
-@include brand-font-faces;
+// @include brand-font-faces;
+
 // import momentum-ui color variables
 // @import '~@momentum-ui/core/scss/colors/settings-base.scss';
 @import './momentum-colors.scss';
 
 // set fonts in bulma
-$family-primary: "CiscoSansTT Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+// $family-primary: "CiscoSansTT Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // set bulma colors using momentum-ui colors
 $info: $md-purple-50;
@@ -40,10 +41,10 @@ $mdi-font-path: '~@mdi/font/fonts';
 // import material design icons
 @import "~@mdi/font/scss/materialdesignicons.scss";
 
-// set buefy b-tag font to regular instead of light
-span.tag {
-  font-family: "CiscoSansTT Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+// set buefy b-tag font to Cisco regular instead of light font
+// span.tag {
+  // font-family: $family-primary;
+// }
 
 // increase box-shadow on modals and boxes
 .modal-card {
