@@ -18,7 +18,9 @@
     style="background-color: white;"
     :style="!title.length ? 'border-radius: 6px;' : ''"
     >
-      <slot />
+      <div class="content">
+        <slot />
+      </div>
     </div>
   </b-collapse>
 </template>

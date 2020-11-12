@@ -1,23 +1,21 @@
 <template>
   <panel :title="`Welcome ${jwtUser.firstName}!`" aria-id="welcome">
-    <div class="content">
-      <p>
-        Welcome to the dCloud Collaboration Instant Demo Toolbox!
-        <br>
-        Join our Webex Teams support room to get help, ask questions, and
-        suggest new features:
-      </p>
-      <div class="buttons" style="justify-content: space-around;">
-        <b-field>
-          <b-button
-          type="is-primary"
-          rounded
-          @click="clickJoinSupportRoom"
-          >
-            Join Support Room
-          </b-button>
-        </b-field>
-      </div>
+    <p>
+      Welcome to the dCloud Webex Contact Center v4 Instant Demo Toolbox!
+      <br>
+      Join our Webex Teams support room to get help, ask questions, and
+      suggest new features:
+    </p>
+    <div class="buttons" style="justify-content: space-around;">
+      <b-field>
+        <b-button
+        type="is-primary"
+        rounded
+        @click="clickJoinSupportRoom"
+        >
+          Join Support Room
+        </b-button>
+      </b-field>
     </div>
   </panel>
 </template>

@@ -3,7 +3,7 @@ import {ToastProgrammatic as Toast} from 'buefy/src'
 const actions = {
   async joinSupportRoom ({dispatch, getters}, email) {
     try {
-      await dispatch('fetchToState', {
+      await dispatch('fetch', {
         group: 'webex',
         type: 'joinSupportRoom',
         url: getters.endpoints.webex,

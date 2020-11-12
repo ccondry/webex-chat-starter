@@ -1,29 +1,25 @@
 import * as types from '../mutation-types'
+// import {addUrlQueryParams} from '../../utils'
 
 const state = {
-  links: [],
-  datacenterNames: {
-    'RTP': 'US East',
-    'SJC': 'US West',
-    'LON': 'EMEAR',
-    'SNG': 'APJ'
-  }
+  verticals: [],
+  demoBaseConfig: {}
 }
 
 const mutations = {
-  [types.SET_LINKS] (state, data) {
-    state.links = data
+  [types.SET_VERTICALS] (state, data) {
+    state.verticals = data
+  },
+  [types.SET_DEMO_BASE_CONFIG] (state, data) {
+    state.demoBaseConfig = data[0]
   }
 }
 
 const getters = {
   isLocked: (state, getters) => {
-    return getters.instance.locked === true
-    // return true
+    return getters.demoBaseConfig.locked === true
   },
-  datacenterDisplayName: (state, getters) => {
-    return state.datacenterNames[getters.datacenter]
-  },
+  verticals: state => state.verticals,
   datacenter: (state, getters) => {
     if (getters.isProduction) {
       // get current hostname of the browser location
@@ -37,17 +33,46 @@ const getters = {
       return 'RTP'
     }
   },
-  links: state => state.links
+  // brandDemoLink (state, getters) {
+  //   return addUrlQueryParams('https://mm-brand.cxdemo.net', {
+  //     session: getters.instance.session,
+  //     datacenter: getters.instance.datacenter,
+  //     userId: getters.jwtUser.id
+  //   })
+  // },
+  demoBaseConfig: state => state.demoBaseConfig
 }
 
 const actions = {
-  getLinks ({dispatch, getters}) {
-    dispatch('fetchToState', {
+  getDemoBaseConfig ({dispatch, getters}) {
+    dispatch('fetch', {
       group: 'dcloud',
-      type: 'links',
-      url: getters.endpoints.links,
-      mutation: types.SET_LINKS,
-      message: 'get links list'
+      type: 'demoBaseConfig',
+      url: getters.endpoints.demoBaseConfig,
+      options: {
+        query: {
+          demo: 'webex',
+          version: 'v4prod',
+          instant: true
+        }
+      },
+      mutation: types.SET_DEMO_BASE_CONFIG,
+      message: 'get demo base config'
+    })
+  },
+  getVerticals ({dispatch, getters}) {
+    dispatch('fetch', {
+      group: 'dcloud',
+      type: 'verticals',
+      url: getters.endpoints.vertical,
+      options: {
+        query: {
+          all: true,
+          summary: true
+        }
+      },
+      mutation: types.SET_VERTICALS,
+      message: 'get verticals list'
     })
   }
 }

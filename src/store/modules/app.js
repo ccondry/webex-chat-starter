@@ -22,7 +22,8 @@ const state = {
   isProduction: process.env.NODE_ENV === 'production',
   demoEnvironment: {},
   uiVersion: version,
-  apiVersion: 'Loading...'
+  apiVersion: 'Loading...',
+  authApiVersion: 'Loading...'
 }
 
 const getters = {
@@ -31,7 +32,8 @@ const getters = {
   working: state => state.working,
   demoEnvironment: state => state.demoEnvironment,
   uiVersion: state => state.uiVersion,
-  apiVersion: state => state.apiVersion
+  apiVersion: state => state.apiVersion,
+  authApiVersion: state => state.authApiVersion
 }
 
 const mutations = {
@@ -63,11 +65,14 @@ const mutations = {
   },
   [types.SET_API_VERSION] (state, data) {
     state.apiVersion = data.version
+  },
+  [types.SET_AUTH_API_VERSION] (state, data) {
+    state.authApiVersion = data.version
   }
 }
 
 const actions = {
-  async fetchToState ({commit, dispatch}, {
+  async fetch ({commit, getters, dispatch}, {
     group,
     type,
     url,
@@ -75,58 +80,50 @@ const actions = {
     mutation,
     message
   }) {
+    if (!url) {
+      throw Error('url is a required parameter for fetch')
+    }
     message = message || `${options.method === 'POST' ? 'save' : 'get'} ${group} ${type}`
     console.log(`${message}...`)
     const loadingOrWorking = !options.method || options.method === 'GET' ? 'setLoading' : 'setWorking'
     dispatch(loadingOrWorking, {group, type, value: true})
     try {
-      const data = await dispatch('fetch', {url, options})
-      console.log(`${message} success:`, data)
-      if (mutation) {
-        commit(mutation, data)
+      // const data = await dispatch('fetch', {url, options})
+      // set default headers
+      options.headers = options.headers || {}
+      // set content type to JSON by default
+      options.headers['Content-Type'] = options.headers['Content-Type'] || 'application/json'
+      // set accept to JSON by default
+      options.headers['Accept'] = options.headers['Accept'] || 'application/json'
+      // set JWT auth header by default
+      options.headers['Authorization'] = options.headers['Authorization'] || 'Bearer ' + getters.jwt
+      // set instant demo instance name
+      options.headers['Instance'] = getters.instanceName
+      // stringify body if it is an object
+      if (typeof options.body === 'object') {
+        options.body = JSON.stringify(options.body)
       }
-      return data
-    } catch (e) {
-      console.error(`${message} failed: ${e.message}`)
-      Toast.open({
-        message: `Failed to ${message}: ${e.message}`,
-        type: 'is-danger',
-        duration: 6 * 1000,
-        queue: false
-      })
-    } finally {
-      dispatch(loadingOrWorking, {group, type, value: false})
-    }
-  },
-  async fetch ({dispatch, getters}, {url, options = {}}) {
-    if (!url) {
-      throw Error('url is a required parameter for fetch')
-    }
-    options.headers = options.headers || {}
-    // set content type to JSON by default
-    options.headers['Content-Type'] = options.headers['Content-Type'] || 'application/json'
-    // set accept to JSON by default
-    options.headers['Accept'] = options.headers['Accept'] || 'application/json'
-    // set JWT auth header by default
-    options.headers['Authorization'] = options.headers['Authorization'] || 'Bearer ' + getters.jwt
-    // set instant demo instance name
-    options.headers['Instance'] = getters.instanceName
-    // stringify body if it is an object
-    if (typeof options.body === 'object') {
-      options.body = JSON.stringify(options.body)
-    }
-    // console.log('fetch', url, options)
-    // add query parameters to URL
-    try {
-      // console.log('url', url)
+      // add query parameters to URL
       const endpoint = addUrlQueryParams(url, options.query)
       // console.log('endpoint', endpoint)
       const response = await window.fetch(endpoint, options)
+      // get the response body as text
       const text = await response.text()
+      // response code 200 - 299?
       if (response.ok) {
         try {
-          return JSON.parse(text)
+          // parse response text into JSON
+          const json = JSON.parse(text)
+          console.log(`${message} success:`, json)
+          if (mutation) {
+            // put JSON data into state
+            commit(mutation, json)
+          }
+          return json
         } catch (e) {
+          // body is not json data. return the raw text, and don't attempt
+          // to put it into state
+          console.log(`${message} success:`, text)
           return text
         }
       } else if (response.status === 401) {
@@ -158,8 +155,15 @@ const actions = {
         throw error
       }
     } catch (e) {
-      // just rethrow any other errors, like connection timeouts
-      throw e
+      console.error(`${message} failed: ${e.message}`)
+      Toast.open({
+        message: `Failed to ${message}: ${e.message}`,
+        type: 'is-danger',
+        duration: 6 * 1000,
+        queue: false
+      })
+    } finally {
+      dispatch(loadingOrWorking, {group, type, value: false})
     }
   },
   setWorking ({commit}, {group, type, value = true}) {
@@ -170,25 +174,23 @@ const actions = {
   },
   async getApiVersion ({commit, dispatch, getters}) {
     // get REST API version
-    const group = 'app'
-    const type = 'version'
-    dispatch('setLoading', {group, type, value: true})
-    try {
-      const url = getters.endpoints.version
-      const data = await dispatch('fetch', {url})
-      console.log('get', group, type, 'success', data)
-      commit(types.SET_API_VERSION, data)
-    } catch (e) {
-      console.log(group, type, 'failed:', e.message)
-      Toast.open({
-        message: 'Failed to load REST API version information: ' + e.message,
-        duration: 6 * 1000,
-        type: 'is-danger',
-        queue: false
-      })
-    } finally {
-      dispatch('setWorking', {group, type, value: false})
-    }
+    dispatch('fetch', {
+      group: 'app',
+      type: 'version',
+      url: getters.endpoints.version,
+      message: 'get REST API version',
+      mutation: types.SET_API_VERSION
+    })
+  },
+  getAuthApiVersion ({dispatch, getters}) {
+    // get Auth REST API version
+    dispatch('fetch', {
+      group: 'app',
+      type: 'authVersion',
+      url: getters.endpoints.authVersion,
+      message: 'get authentication REST API version',
+      mutation: types.SET_AUTH_API_VERSION
+    })
   },
   copyToClipboard ({}, {string, type = 'Text'}) {
     // copy text to clipboard

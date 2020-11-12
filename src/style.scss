@@ -87,3 +87,52 @@ div.collapse.panel {
 div.collapse {
   box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
 }
+
+// hide scroll bar
+html, body {
+  background-image: url(./assets/images/sign_in_background.jpg);
+  // background-position: 0 0;
+  background-position: 50%;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+// make container fill viewport
+#main-container {
+  height: 100vh;
+  padding-top: 1rem;
+}
+
+// each route content container class - centered
+section.main {
+  // flex layout
+  display: flex;
+  // keep small amounts of content vertically centered
+  min-height: 100%;
+  justify-content: center;
+  // center panels horizontally
+  align-items: center;
+  // put content in a column down the page
+  flex-direction: column;
+  // pad the bottom a bit, so the last content doesn't stick to the very bottom
+  // of the window
+  padding-bottom: 1.5rem;
+}
+
+section.main > div {
+  // padding-bottom: 1rem;
+}
+
+// blinking for "new" tag
+.blinking{
+  animation: blinkingText 2s infinite;
+}
+
+@keyframes blinkingText{
+  0% { background-color: currentColor; }
+  49% { background-color: currentColor; }
+  60% { background-color: transparent; }
+  99% { background-color: transparent; }
+  100% { background-color: currentColor; }
+}

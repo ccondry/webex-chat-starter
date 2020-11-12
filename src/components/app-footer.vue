@@ -9,6 +9,9 @@
         API Version {{ apiVersion }}
       </small>
       <small>
+        Auth API Version {{ authApiVersion }}
+      </small>
+      <small>
         © 2020 Cisco and/or its affiliates. All rights reserved.
       </small>
     </div>
@@ -27,7 +30,8 @@ export default {
   computed: {
     ...mapGetters([
       'uiVersion',
-      'apiVersion'
+      'apiVersion',
+      'authApiVersion'
     ])
   }
 }

@@ -2,51 +2,35 @@
   <div>
     <!-- top navbar -->
     <navbar />
-    <!-- loading -->
-    <b-loading :active="isProduction && !links.length" :is-full-page="true" />
     <!-- main -->
     <div
-    v-if="isLoggedIn && links.length"
     id="main-container"
     class="container is-fluid is-marginless app-content"
     >
       <section class="main">
+        <!-- loading -->
+        <b-loading :active="isLoading" />
+
         <!-- welcome -->
         <welcome />
 
-        <!-- common links -->
-        <link-group
-        :links="commonLinks"
-        title="Tools"
-        aria-id="tools"
-        />
+        <!-- Provision -->
+        <provision v-if="!isProvisioned" />
 
-        <!-- dcloud demos -->
-        <link-group
-        v-if="dcloudLinks.length"
-        :links="dcloudLinks"
-        title="Instant Demos"
-        aria-id="instant-demos"
-        />
+        <!-- Agents and Supervisors -->
+        <agents v-if="isProvisioned" />
 
-        <!-- cxdemo demos -->
-        <link-group
-        v-if="cxdemoLinks.length"
-        :links="cxdemoLinks"
-        title="Other Demos"
-        aria-id="other-demos"
-        />
+        <!-- Demo Website -->
+        <demo-website v-if="isProvisioned" />
 
-        <!-- QA -->
-        <link-group
-        v-if="qaLinks.length"
-        :links="qaLinks"
-        title="QA Testing"
-        aria-id="qa"
-        />
+        <!-- Reprovision -->
+        <reprovision v-if="isProvisioned" />
+
+        <!-- debug info -->
+        <debug v-if="!isProduction" />
 
         <!-- Copyright and version footer -->
-        <app-footer style="margin-bottom: 1rem;" />
+        <app-footer />
       </section>
     </div>
   </div>
@@ -55,16 +39,24 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 import Navbar from './components/navbar'
-import LinkGroup from './components/link-group'
 import Welcome from './components/welcome'
+import Provision from './components/provision'
+import Agents from './components/agents'
+import DemoWebsite from './components/demo-website'
+import Reprovision from './components/reprovision'
 import AppFooter from './components/app-footer'
+import Debug from './components/debug'
 
 export default {
   components: {
     Navbar,
-    LinkGroup,
     Welcome,
-    AppFooter
+    Provision,
+    Agents,
+    DemoWebsite,
+    Reprovision,
+    AppFooter,
+    Debug
   },
 
   computed: {
@@ -72,20 +64,15 @@ export default {
       'isLoggedIn',
       'isAdmin',
       'jwtUser',
-      'links',
-      'isProduction'
+      'loading',
+      'working',
+      'isProvisioned',
+      'isProduction',
+      'demoUserConfig'
     ]),
-    qaLinks () {
-      return this.links.filter(link => link.tags.includes('qa'))
-    },
-    commonLinks () {
-      return this.links.filter(link => link.tags.includes('common'))
-    },
-    dcloudLinks () {
-      return this.links.filter(link => link.tags.includes('dcloud'))
-    },
-    cxdemoLinks () {
-      return this.links.filter(link => link.tags.includes('cxdemo'))
+    isLoading () {
+      return this.loading.app.environment ||
+      this.loading.user.provision
     }
   },
 
@@ -106,63 +93,23 @@ export default {
     this.checkJwt()
     // get the REST API version
     this.getApiVersion()
+    // get the Authentication REST API version
+    this.getAuthApiVersion()
+    // get the demo base configuration for webex-v4prod
+    this.getDemoBaseConfig()
+    // get demo verticals list
+    this.getVerticals()
   },
 
   methods: {
     ...mapActions([
       'checkJwt',
+      'getAuthApiVersion',
       'getApiVersion',
-      'login'
+      'login',
+      'getDemoBaseConfig',
+      'getVerticals'
     ])
   }
 }
 </script>
-
-<style lang="scss">
-// hide scroll bar
-html, body {
-  background-image: url(./assets/images/sign_in_background.jpg);
-  // background-position: 0 0;
-  background-position: 50%;
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-// make container fill viewport
-#main-container {
-  height: 100vh;
-  padding-top: 1rem;
-}
-
-// each route content container class - centered
-section.main {
-  // flex layout
-  display: flex;
-  // keep small amounts of content vertically centered
-  min-height: 100%;
-  justify-content: center;
-  // center panels horizontally
-  align-items: center;
-  // put content in a column down the page
-  flex-direction: column;
-}
-
-section.main > div {
-  // padding-bottom: 1rem;
-}
-
-// blinking for "new" tag
-.blinking{
-  animation: blinkingText 2s infinite;
-}
-
-@keyframes blinkingText{
-  0% { background-color: currentColor; }
-  49% { background-color: currentColor; }
-  60% { background-color: transparent; }
-  99% { background-color: transparent; }
-  100% { background-color: currentColor; }
-}
-
-</style>
