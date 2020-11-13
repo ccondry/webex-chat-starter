@@ -9,7 +9,7 @@
     >
       <section class="main">
         <!-- loading -->
-        <b-loading :active="isLoading" />
+        <b-loading :active="isLoading || isWorking" />
 
         <!-- welcome -->
         <welcome />
@@ -74,11 +74,16 @@ export default {
       'working',
       'isProvisioned',
       'isProduction',
-      'userDemoConfig'
+      'userDemoConfig',
+      'provisionStatus'
     ]),
     isLoading () {
       return this.loading.app.environment ||
-      this.loading.user.provision
+      this.loading.user.provision ||
+      this.loading.user.details
+    },
+    isWorking () {
+      return this.working.user.provision || this.provisionStatus === 'working'
     }
   },
 
@@ -89,6 +94,29 @@ export default {
       } else if (!val && oldVal) {
         // user just logged out. make them log in again.
         this.login()
+      }
+    },
+    provisionJobId (val) {
+      if (val) {
+        if (this.provisionStatus === null || this.provisionStatus === 'working') {
+          
+        } else {
+          // stop interval
+          clearInterval(this.interval)
+        }
+      }
+    },
+    provisionStatus (val) {
+      if (val === 'working') {
+        // start interval to refresh provision status until its done
+        this.interval = setInterval(() => {
+          this.getProvisionStatus()
+        }, 4 * 1000)
+      } else if (val !== null) {
+        // success or error - stop interval
+        clearInterval(this.interval)
+        // get updated user data
+        this.getUser()
       }
     }
   },
@@ -114,7 +142,9 @@ export default {
       'getApiVersion',
       'login',
       'getDemoBaseConfig',
-      'getVerticals'
+      'getVerticals',
+      'getProvisionStatus',
+      'getUser'
     ])
   }
 }

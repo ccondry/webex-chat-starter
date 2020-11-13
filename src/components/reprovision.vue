@@ -47,7 +47,9 @@ export default {
     ...mapGetters([
       'jwtUser',
       'working',
-      'sessionId'
+      'loading',
+      'sessionId',
+      'provisionStatus'
     ]),
     buttonText () {
       if (this.working.user.provision) {

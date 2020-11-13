@@ -3,7 +3,7 @@
   <panel title="Admin" aria-id="admin">
     <b-loading :active="isLoading || isWorking" :is-full-page="false" />
     <p>
-      Manually enter this user's demo configuration.
+      Manually enter this user's demo configuration, then click Save.
     </p>
     <!-- vertical -->
     <b-field label="Vertical ID">

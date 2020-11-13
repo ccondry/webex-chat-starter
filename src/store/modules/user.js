@@ -13,7 +13,9 @@ function parseJwt (token) {
 
 const state = {
   jwt: null,
-  user: null
+  user: null,
+  provisionStatus: null,
+  provisionJobId: null
 }
 
 const mutations = {
@@ -22,11 +24,19 @@ const mutations = {
   },
   [types.SET_USER] (state, data) {
     state.user = data
+  },
+  [types.SET_PROVISION_JOB_ID] (state, data) {
+    state.provisionJobId = data.id
+  },
+  [types.SET_PROVISION_STATUS] (state, data) {
+    state.provisionStatus = data.status
   }
 }
 
 const getters = {
   user: state => state.user,
+  provisionJobId: state => state.provisionJobId,
+  provisionStatus: state => state.provisionStatus,
   userDemoConfig: state => {
     try {
       return state.user.demo['webex-v4'] || {}
@@ -104,6 +114,15 @@ const actions = {
       console.log(e)
     }
   },
+  getProvisionStatus ({dispatch, getters}, password) {
+    dispatch('fetch', {
+      group: 'user',
+      type: 'provision',
+      url: getters.endpoints.provision + '/' + getters.provisionJobId,
+      message: 'check provision status',
+      mutation: types.SET_PROVISION_STATUS
+    })
+  },
   resetPassword ({dispatch, getters}, password) {
     dispatch('fetch', {
       group: 'user',
@@ -118,7 +137,7 @@ const actions = {
       message: 'reset password'
     })
   },
-  async provisionUser ({dispatch, getters}) {
+  async provisionUser ({commit, dispatch, getters}) {
     try {
       await dispatch('fetch', {
         group: 'user',
@@ -127,9 +146,13 @@ const actions = {
         options: {
           method: 'POST'
         },
-        message: 'provision user'
+        message: 'provision user',
+        mutation: types.SET_PROVISION_JOB_ID
       })
-      dispatch('getUser')
+      // set status to working now
+      commit(types.SET_PROVISION_STATUS, 'working')
+      // and get status from server
+      dispatch('getProvisionStatus')
     } catch (e) {
       console.log(e)
     }
