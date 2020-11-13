@@ -72,7 +72,19 @@
         Save
       </b-button>
     </b-field>
-    <!-- /Save Button -->
+
+    <!-- Delete Button -->
+    <b-field>
+      <b-button
+      :disabled="working.user.provision"
+      type="is-danger"
+      rounded
+      expanded
+      @click.prevent="clickDeprovision"
+      >
+        Delete Account
+      </b-button>
+    </b-field>
   </panel>
 </template>
 
@@ -93,7 +105,8 @@ export default {
       'isAdminSu',
       'userDemoConfig',
       'working',
-      'loading'
+      'loading',
+      'jwtUser'
     ]),
     disableSave () {
       return false
@@ -118,8 +131,23 @@ export default {
 
   methods: {
     ...mapActions([
-      'saveUserDemoConfig'
+      'saveUserDemoConfig',
+      'deprovisionUser'
     ]),
+    clickDeprovision () {
+      console.log('clickDeprovision')
+      this.$buefy.dialog.confirm({
+        title: 'Delete Account',
+        message: `Are you sure you want to delete this Webex v4 provision information for <strong>${this.jwtUser.username} (${this.jwtUser.id})</strong>?`,
+        rounded: true,
+        confirmText: 'Confirm',
+        type: 'is-danger',
+        onConfirm: () => {
+          console.log('click confirm Deprovision')
+          this.deprovisionUser()
+        }
+      })
+    },
     clickSave () {
       const copy = JSON.parse(JSON.stringify(this.model))
       this.saveUserDemoConfig(copy)

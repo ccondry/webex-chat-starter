@@ -18,18 +18,6 @@
         {{ buttonText }}
       </b-button>
     </b-field>
-
-    <b-field>
-      <b-button
-      :disabled="working.user.provision"
-      type="is-danger"
-      rounded
-      expanded
-      @click.prevent="clickDeprovision"
-      >
-        Delete Account
-      </b-button>
-    </b-field>
   </panel>
 </template>
 
@@ -62,28 +50,13 @@ export default {
 
   methods: {
     ...mapActions([
-      'provisionUser',
-      'deprovisionUser'
+      'provisionUser'
     ]),
     startTimer () {
       // advance the timer every 1 second
       setInterval(() => {
         this.timerNow = new Date().getTime()
       }, 1000)
-    },
-    clickDeprovision () {
-      console.log('clickDeprovision')
-      this.$buefy.dialog.confirm({
-        title: 'Delete Account',
-        message: 'Are you sure you want to delete your account?',
-        rounded: true,
-        confirmText: 'Confirm',
-        type: 'is-danger',
-        onConfirm: () => {
-          console.log('click confirm Deprovision')
-          this.deprovisionUser()
-        }
-      })
     },
     clickProvision () {
       console.log('user clicked Reprovision button')
