@@ -18,7 +18,7 @@
     style="background-color: white;"
     :style="!title.length ? 'border-radius: 6px;' : ''"
     >
-      <div class="content">
+      <div class="content" style="position: relative;">
         <slot />
       </div>
     </div>

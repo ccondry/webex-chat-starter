@@ -22,14 +22,28 @@ const actions = {
         options: {
           method: 'POST',
           body: {personEmail: email}
-        }
+        },
+        showNotification: false,
+        message: 'join Webex support room'
       })
       Toast.open({
         type: 'is-success',
         message: `You have been added to the support space`
       })
     } catch (e) {
-      console.log(e)
+      if (e.status === 409) {
+        Toast.open({
+          type: 'is-success',
+          message: `You have been added to the support space`
+        })
+      } else {
+        Toast.open({
+          message: `Failed to add you to the support space: ${e.message}`,
+          type: 'is-danger',
+          duration: 6 * 1000,
+          queue: false
+        })
+      }
     }
   }
 }

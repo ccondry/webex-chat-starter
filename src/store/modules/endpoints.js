@@ -21,7 +21,9 @@ const getters = {
       logout: authUrlBase + '/logout',
       demoBaseConfig: mmUrlBase + '/demo',
       vertical: mmUrlBase + '/verticals',
-      provision: urlBase + '/provision'
+      provision: urlBase + '/provision',
+      userDemoConfig: authUrlBase + '/user/demo',
+      user: authUrlBase + '/user'
     }
   },
   defaultRestOptions: (state, getters) => {

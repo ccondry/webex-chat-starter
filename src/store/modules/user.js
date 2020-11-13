@@ -13,20 +13,27 @@ function parseJwt (token) {
 
 const state = {
   jwt: null,
-  demoConfig: {}
+  user: null
 }
 
 const mutations = {
   [types.SET_JWT] (state, data) {
     state.jwt = data
   },
-  [types.SET_PROVISION] (state, data) {
-    state.demoConfig = data
+  [types.SET_USER] (state, data) {
+    state.user = data
   }
 }
 
 const getters = {
-  userDemoConfig: state => state.demoConfig,
+  user: state => state.user,
+  userDemoConfig: state => {
+    try {
+      return state.user.demo['webex-v4'] || {}
+    } catch (e) {
+      return {}
+    }
+  },
   isAdminSu: (state, getters) => {
     try {
       return getters.jwtUser.suJwt
@@ -57,7 +64,11 @@ const getters = {
     }
   },
   isProvisioned: (state, getters) => {
-    return Object.keys(getters.userDemoConfig).length > 0
+    try {
+      return typeof getters.userDemoConfig.queueId === 'string'
+    } catch (e) {
+      return false
+    }
   }
 }
 
@@ -87,16 +98,8 @@ const actions = {
   },
   async deprovisionUser ({dispatch, getters}, password) {
     try {
-      await dispatch('fetch', {
-        group: 'user',
-        type: 'deprovision',
-        url: getters.endpoints.provision,
-        options: {
-          method: 'DELETE'
-        },
-        message: 'deprovision'
-      })
-      dispatch('getProvision')
+      await dispatch('saveUserDemoConfig', {queueId: null})
+      dispatch('getUser')
     } catch (e) {
       console.log(e)
     }
@@ -126,31 +129,40 @@ const actions = {
         },
         message: 'provision user'
       })
-      dispatch('getProvision')
+      dispatch('getUser')
     } catch (e) {
       console.log(e)
     }
   },
-  getProvision ({dispatch, getters}) {
+  getUser ({dispatch, getters}) {
     dispatch('fetch', {
       group: 'user',
-      type: 'provision',
-      url: getters.endpoints.provision,
-      message: 'get provision information',
-      mutation: types.SET_PROVISION
+      type: 'details',
+      url: getters.endpoints.user,
+      message: 'get user details',
+      mutation: types.SET_USER
     })
   },
-  saveUserDemoConfig ({dispatch, getters}, body) {
-    dispatch('fetch', {
-      group: 'user',
-      type: 'demoConfig',
-      url: getters.endpoints.demoConfig,
-      options: {
-        method: 'POST',
-        body
-      },
-      message: 'save demo configuration'
-    })
+  async saveUserDemoConfig ({dispatch, getters}, body) {
+    try {
+      await dispatch('fetch', {
+        group: 'user',
+        type: 'demoConfig',
+        url: getters.endpoints.userDemoConfig,
+        options: {
+          method: 'POST',
+          body,
+          query: {
+            id: 'webex-v4'
+          }
+        },
+        message: 'save user demo configuration'
+      })
+      // refresh state data
+      dispatch('getUser')
+    } catch (e) {
+      console.log(e.message)
+    }
   },
   setJwt ({commit, dispatch}, jwt) {
     try {
@@ -161,7 +173,7 @@ const actions = {
       // put JWT in localStorage
       window.localStorage.setItem('jwt', jwt)
       // get provision info for this user
-      dispatch('getProvision')
+      dispatch('getUser')
     } catch (e) {
       // parseJwt failed - delete this invalid JWT
       dispatch('unsetJwt')

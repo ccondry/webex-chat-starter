@@ -13,7 +13,7 @@ export const SET_JWT = 'SET_JWT'
 // links list
 export const SET_LINKS = 'SET_LINKS'
 
-// user demo provision / config info
-export const SET_PROVISION = 'SET_PROVISION'
+// user details
+export const SET_USER = 'SET_USER'
 // demo verticals list
 export const SET_VERTICALS = 'SET_VERTICALS'

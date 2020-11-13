@@ -85,24 +85,11 @@ export default {
     },
     clickProvision () {
       console.log('user clicked Reprovision button')
-      this.$buefy.dialog.prompt({
-        title: 'Provision',
-        message: `Please choose a password for your VPN account (it can be the same as before):`,
-        inputAttrs: {
-          placeholder: 'Your new (or existing) VPN password',
-          type: 'password'
-        },
-        rounded: true,
-        confirmText: 'Submit',
-        type: 'is-success',
-        onConfirm: (password) => {
-          this.provisionUser(password)
-          // not first provision
-          // set timer for working estimate to 45 seconds
-          this.timerEnd = new Date().getTime() + 45 * 1000
-          this.startTimer()
-        }
-      })
+      this.provisionUser()
+      // not first provision
+      // set timer for working estimate to 45 seconds
+      this.timerEnd = new Date().getTime() + 45 * 1000
+      this.startTimer()
     }
   }
 }

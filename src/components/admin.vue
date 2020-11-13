@@ -1,8 +1,9 @@
 <template>
   <!-- full config details for user when using admin using switch-user -->
-  <panel title="Admin Configuration" aria-id="panel">
+  <panel title="Admin" aria-id="admin">
+    <b-loading :active="isLoading || isWorking" :is-full-page="false" />
     <p>
-      Manually configure this user's demo configuration.
+      Manually enter this user's demo configuration.
     </p>
     <!-- vertical -->
     <b-field label="Vertical ID">
@@ -66,7 +67,7 @@
       :disabled="disableSave"
       rounded
       expanded
-      @click.prevent="clickSave"
+      @click="clickSave"
       >
         Save
       </b-button>
@@ -76,21 +77,55 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  data () {
+    return {
+      model: {}
+    }
+  },
+
   computed: {
     ...mapGetters([
       'defaults',
       'isAdmin',
       'isAdminSu',
-      'userDemoConfig'
+      'userDemoConfig',
+      'working',
+      'loading'
     ]),
-    model () {
-      return this.userDemoConfig
-    },
     disableSave () {
       return false
+    },
+    isWorking () {
+      return this.working.user.demoConfig
+    },
+    isLoading () {
+      return this.loading.user.details
+    }
+  },
+
+  watch: {
+    userDemoConfig () {
+      this.updateCache()
+    }
+  },
+
+  mounted () {
+    this.updateCache()
+  },
+
+  methods: {
+    ...mapActions([
+      'saveUserDemoConfig'
+    ]),
+    clickSave () {
+      const copy = JSON.parse(JSON.stringify(this.model))
+      this.saveUserDemoConfig(copy)
+    },
+    updateCache () {
+      this.model = JSON.parse(JSON.stringify(this.userDemoConfig))
     }
   }
 }

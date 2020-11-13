@@ -78,7 +78,8 @@ const actions = {
     url,
     options = {},
     mutation,
-    message
+    message,
+    showNotification = true
   }) {
     if (!url) {
       throw Error('url is a required parameter for fetch')
@@ -137,9 +138,9 @@ const actions = {
           const json = JSON.parse(text)
           m = json.message || json.apiError || json[Object.keys(json)[0]]
         } catch (e) {
+          // use empty string instead of text/html content
           const regex = /text\/html/i
           if (response.headers.get('content-type').match(regex)) {
-            // text/html - don't return that whole thing
             m = ''
           }
         }
@@ -156,12 +157,14 @@ const actions = {
       }
     } catch (e) {
       console.error(`${message} failed: ${e.message}`)
-      Toast.open({
-        message: `Failed to ${message}: ${e.message}`,
-        type: 'is-danger',
-        duration: 6 * 1000,
-        queue: false
-      })
+      if (showNotification) {
+        Toast.open({
+          message: `Failed to ${message}: ${e.message}`,
+          type: 'is-danger',
+          duration: 6 * 1000,
+          queue: false
+        })
+      }
     } finally {
       dispatch(loadingOrWorking, {group, type, value: false})
     }

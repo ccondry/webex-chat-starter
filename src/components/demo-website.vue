@@ -1,107 +1,105 @@
 <template>
   <panel title="Demo Website" aria-id="demo-website">
-    <div class="content" style="position: relative">
-      <b-loading :active="isLoading || isWorking" :is-full-page="false" />
-      <p>
-        Choose the vertical you want to use, then click Go to Demo Website to
-        show the customer side of the demo.
-      </p>
-      <b-field>
-        <b-select 
-        v-model="vertical" 
-        :disabled="working.app.user"
-        @change.native="verticalChanged" 
+    <b-loading :active="isLoading || isWorking" :is-full-page="false" />
+    <p>
+      Choose the vertical you want to use, then click Go to Demo Website to
+      show the customer side of the demo.
+    </p>
+    <b-field>
+      <b-select 
+      v-model="vertical" 
+      :disabled="working.app.user"
+      @change.native="verticalChanged" 
+      >
+        <option :value="null" disabled selected>
+          Choose Your Demo Vertical
+        </option>
+        <option
+        v-for="(brand, index) in systemBrands" 
+        :key="'system' + index"
+        :value="brand.id"
         >
-          <option :value="null" disabled selected>
-            Choose Your Demo Vertical
-          </option>
-          <option
-          v-for="(brand, index) in systemBrands" 
-          :key="'system' + index"
-          :value="brand.id"
-          >
-            {{ `${brand.name} (${brand.id})` }}
-          </option>
-          <option disabled>
-            -----------------------------------------
-          </option>
-          <option
-          v-for="(brand, index) in otherBrands"
-          :key="'other' + index"
-          :value="brand.id"
-          >
-            {{ `${brand.name} (${brand.id})` }}
-          </option>
-        </b-select>
-      </b-field>
-      
-      <b-field>
-        <b-checkbox
-        v-model="showMore"
+          {{ `${brand.name} (${brand.id})` }}
+        </option>
+        <option disabled>
+          -----------------------------------------
+        </option>
+        <option
+        v-for="(brand, index) in otherBrands"
+        :key="'other' + index"
+        :value="brand.id"
         >
-          Show More
-        </b-checkbox>
-      </b-field>
+          {{ `${brand.name} (${brand.id})` }}
+        </option>
+      </b-select>
+    </b-field>
+    
+    <b-field>
+      <b-checkbox
+      v-model="showMore"
+      >
+        Show More
+      </b-checkbox>
+    </b-field>
 
-      <b-field v-show="showMore">
+    <b-field v-show="showMore">
+      <div class="field">
         <div class="field">
-          <div class="field">
-            <b-radio
-            v-if="isAdmin"
-            v-model="brandFilter"
-            native-value="all"
-            >
-              Show all verticals
-            </b-radio>
-          </div>
-          <div class="field">
-            <b-radio
-            v-model="brandFilter"
-            native-value="mine"
-            >
-              Show my verticals
-            </b-radio>
-          </div>
-          <div class="field">
-            <b-radio
-            v-model="brandFilter"
-            native-value="other"
-            >
-              <span style="float: left;">Show this user's verticals:</span>
-            </b-radio>
-
-            <b-autocomplete
-            v-model="ownerFilter"
-            :data="autocompleteOwners"
-            style="width: 20em;"
-            >
-              <template slot="empty">
-                No results found
-              </template>
-            </b-autocomplete>
-          </div>
+          <b-radio
+          v-if="isAdmin"
+          v-model="brandFilter"
+          native-value="all"
+          >
+            Show all verticals
+          </b-radio>
         </div>
-      </b-field>
+        <div class="field">
+          <b-radio
+          v-model="brandFilter"
+          native-value="mine"
+          >
+            Show my verticals
+          </b-radio>
+        </div>
+        <div class="field">
+          <b-radio
+          v-model="brandFilter"
+          native-value="other"
+          >
+            <span style="float: left;">Show this user's verticals:</span>
+          </b-radio>
 
-      <p>
-        Note: You can create and configure your own vertical on the
-        <a href="/branding" target="brand-toolbox">
-          <strong>Demo Branding Toolbox</strong>
-        </a>.
-      </p>
+          <b-autocomplete
+          v-model="ownerFilter"
+          :data="autocompleteOwners"
+          style="width: 20em;"
+          >
+            <template slot="empty">
+              No results found
+            </template>
+          </b-autocomplete>
+        </div>
+      </div>
+    </b-field>
 
-      <b-field v-if="!isLocked">
-        <b-button
-        :disabled="working.app.user"
-        type="is-success"
-        rounded
-        expanded
-        @click="clickGo"
-        >
-          Go to Demo Website
-        </b-button>
-      </b-field>
-    </div>
+    <p>
+      Note: You can create and configure your own vertical on the
+      <a href="/branding" target="brand-toolbox">
+        <strong>Demo Branding Toolbox</strong>
+      </a>.
+    </p>
+
+    <b-field v-if="!isLocked">
+      <b-button
+      :disabled="working.app.user"
+      type="is-success"
+      rounded
+      expanded
+      @click="clickGo"
+      >
+        Go to Demo Website
+      </b-button>
+    </b-field>
   </panel>
 </template>
 
@@ -128,7 +126,8 @@ export default {
       'userDemoConfig',
       'isAdmin',
       'loading',
-      'jwtUser'
+      'jwtUser',
+      'isLocked'
     ]),
     isWorking () {
       return this.working.user.demoConfig
@@ -219,7 +218,7 @@ export default {
 
   methods: {
     ...mapActions([
-      'saveDemoConfig'
+      'saveUserDemoConfig'
     ]),
     updateCache () {
       try {
@@ -249,10 +248,7 @@ export default {
         multichannel: e.target.value
       }
       // save demo config for user
-      this.saveDemoConfig({
-        data,
-        showNotification: false
-      })
+      this.saveUserDemoConfig(data)
     },
     verticalChanged (e) {
       console.log('vertical selected:', e.target.value)
@@ -261,11 +257,7 @@ export default {
         vertical: e.target.value
       }
       // save vertical
-      this.saveDemoConfig({
-        data,
-        showNotification: false
-      })
-      // await this.loadDemoConfig(false)
+      this.saveUserDemoConfig(data)
     },
     clickGo (e) {
       console.log('user clicked button to go to demo website. going to', this.brandDemoLink)

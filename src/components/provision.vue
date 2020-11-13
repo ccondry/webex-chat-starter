@@ -9,18 +9,17 @@
     <p v-if="!isLocked">
       Would you like to provision your account?
     </p>
-    <div class="buttons" style="justify-content: space-around;">
-      <b-field v-if="!isLocked">
-        <b-button
-        :disabled="working.user.provision"
-        type="is-success"
-        rounded
-        @click.prevent="clickProvision"
-        >
-          {{ buttonText }}
-        </b-button>
-      </b-field>
-    </div>
+    <b-field v-if="!isLocked">
+      <b-button
+      :disabled="working.user.provision"
+      type="is-success"
+      rounded
+      expanded
+      @click.prevent="clickProvision"
+      >
+        {{ buttonText }}
+      </b-button>
+    </b-field>
   </panel>
 </template>
 
