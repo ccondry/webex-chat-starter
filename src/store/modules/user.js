@@ -74,8 +74,10 @@ const getters = {
     }
   },
   isProvisioned: (state, getters) => {
+    // user is provisioned if chat template ID and voice queue ID exist
     try {
-      return typeof getters.userDemoConfig.queueId === 'string'
+      return typeof getters.userDemoConfig.queueId === 'string' &&
+      typeof getters.userDemoConfig.templateId === 'string'
     } catch (e) {
       return false
     }
@@ -108,7 +110,7 @@ const actions = {
   },
   async deprovisionUser ({dispatch, getters}, password) {
     try {
-      await dispatch('saveUserDemoConfig', {queueId: null})
+      await dispatch('saveUserDemoConfig', {queueId: null, templateId: null})
       dispatch('getUser')
     } catch (e) {
       console.log(e)
