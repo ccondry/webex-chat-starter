@@ -15,7 +15,10 @@
         <welcome />
 
         <!-- Provision -->
-        <provision v-if="!isProvisioned" />
+        <provision v-if="!isProvisionStarted" />
+
+        <!-- Provision In Progress -->
+        <provision-progress v-if="isProvisionStarted && !isProvisioned" />
 
         <!-- Agents and Supervisors -->
         <agents v-if="isProvisioned" />
@@ -30,7 +33,7 @@
         <admin v-if="isAdmin || isAdminSu" />
 
         <!-- debug info -->
-        <debug v-if="!isProduction" />
+        <!-- <debug v-if="!isProduction" /> -->
 
         <!-- Copyright and version footer -->
         <app-footer />
@@ -44,11 +47,12 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import Navbar from './components/navbar'
 import Welcome from './components/welcome'
 import Provision from './components/provision'
+import ProvisionProgress from './components/provision-progress'
 import Agents from './components/agents'
 import DemoWebsite from './components/demo-website'
 import Reprovision from './components/reprovision'
 import AppFooter from './components/app-footer'
-import Debug from './components/debug'
+// import Debug from './components/debug'
 import Admin from './components/admin'
 
 export default {
@@ -56,11 +60,12 @@ export default {
     Navbar,
     Welcome,
     Provision,
+    ProvisionProgress,
     Agents,
     DemoWebsite,
     Reprovision,
     AppFooter,
-    Debug,
+    // Debug,
     Admin
   },
 
@@ -73,9 +78,9 @@ export default {
       'loading',
       'working',
       'isProvisioned',
+      'isProvisionStarted',
       'isProduction',
-      'userDemoConfig',
-      'provisionStatus'
+      'userDemoConfig'
     ]),
     isLoading () {
       return this.loading.app.environment ||
@@ -83,7 +88,7 @@ export default {
       this.loading.user.details
     },
     isWorking () {
-      return this.working.user.provision || this.provisionStatus === 'working'
+      return this.working.user.provision
     }
   },
 
@@ -96,27 +101,23 @@ export default {
         this.login()
       }
     },
-    provisionJobId (val) {
-      if (val) {
-        if (this.provisionStatus === null || this.provisionStatus === 'working') {
-          
-        } else {
-          // stop interval
+    isProvisionStarted (val, oldVal) {
+      if (val && !oldVal) {
+        // provision was started
+        // clear any previous exisitng interval, just in case
+        if (this.interval) {
           clearInterval(this.interval)
         }
-      }
-    },
-    provisionStatus (val) {
-      if (val === 'working') {
         // start interval to refresh provision status until its done
         this.interval = setInterval(() => {
-          this.getProvisionStatus()
-        }, 4 * 1000)
-      } else if (val !== null) {
-        // success or error - stop interval
+          this.getUser()
+        }, 15 * 1000)
+      } 
+    },
+    isProvisioned (val, oldVal) {
+      if (val && !oldVal) {
+        // provision completed. stop interval.
         clearInterval(this.interval)
-        // get updated user data
-        this.getUser()
       }
     }
   },
@@ -143,7 +144,6 @@ export default {
       'login',
       'getDemoBaseConfig',
       'getVerticals',
-      'getProvisionStatus',
       'getUser'
     ])
   }

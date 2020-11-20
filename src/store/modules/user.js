@@ -13,9 +13,7 @@ function parseJwt (token) {
 
 const state = {
   jwt: null,
-  user: null,
-  provisionStatus: null,
-  provisionJobId: null
+  user: null
 }
 
 const mutations = {
@@ -24,19 +22,11 @@ const mutations = {
   },
   [types.SET_USER] (state, data) {
     state.user = data
-  },
-  [types.SET_PROVISION_JOB_ID] (state, data) {
-    state.provisionJobId = data.id
-  },
-  [types.SET_PROVISION_STATUS] (state, data) {
-    state.provisionStatus = data.status
   }
 }
 
 const getters = {
   user: state => state.user,
-  provisionJobId: state => state.provisionJobId,
-  provisionStatus: state => state.provisionStatus,
   userDemoConfig: state => {
     try {
       return state.user.demo['webex-v4prod'] || {}
@@ -74,10 +64,18 @@ const getters = {
     }
   },
   isProvisioned: (state, getters) => {
-    // user is provisioned if chat template ID and voice queue ID exist
+    // user provision is complete if chat template ID and voice queue ID exist
     try {
-      return typeof getters.userDemoConfig.queueId === 'string' &&
-      typeof getters.userDemoConfig.templateId === 'string'
+      return getters.userDemoConfig.queueId.length > 0 &&
+      getters.userDemoConfig.templateId.length > 0
+    } catch (e) {
+      return false
+    }
+  },
+  isProvisionStarted: (state, getters) => {
+    // provision started if user demo config has any values
+    try {
+      return getters.userDemoConfig.orgId.length > 0
     } catch (e) {
       return false
     }
@@ -110,20 +108,11 @@ const actions = {
   },
   async deprovisionUser ({dispatch, getters}, password) {
     try {
-      await dispatch('saveUserDemoConfig', {queueId: null, templateId: null})
+      await dispatch('saveUserDemoConfig', {queueId: null, templateId: null, orgId: null})
       dispatch('getUser')
     } catch (e) {
       console.log(e)
     }
-  },
-  getProvisionStatus ({dispatch, getters}, password) {
-    dispatch('fetch', {
-      group: 'user',
-      type: 'provision',
-      url: getters.endpoints.provision + '/' + getters.provisionJobId,
-      message: 'check provision status',
-      mutation: types.SET_PROVISION_STATUS
-    })
   },
   resetPassword ({dispatch, getters}, password) {
     dispatch('fetch', {
@@ -148,13 +137,10 @@ const actions = {
         options: {
           method: 'POST'
         },
-        message: 'provision user',
-        mutation: types.SET_PROVISION_JOB_ID
+        message: 'provision user'
       })
-      // set status to working now
-      commit(types.SET_PROVISION_STATUS, 'working')
-      // and get status from server
-      dispatch('getProvisionStatus')
+      // update user data
+      dispatch('getUser')
     } catch (e) {
       console.log(e)
     }

@@ -17,7 +17,3 @@ export const SET_LINKS = 'SET_LINKS'
 export const SET_USER = 'SET_USER'
 // demo verticals list
 export const SET_VERTICALS = 'SET_VERTICALS'
-// set provision status text
-export const SET_PROVISION_STATUS = 'SET_PROVISION_STATUS'
-// set provision status job ID
-export const SET_PROVISION_JOB_ID = 'SET_PROVISION_JOB_ID'
