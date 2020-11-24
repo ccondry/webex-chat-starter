@@ -23,7 +23,8 @@ const getters = {
       vertical: mmUrlBase + '/verticals',
       provision: urlBase + '/provision',
       userDemoConfig: authUrlBase + '/user/demo',
-      user: authUrlBase + '/user'
+      user: authUrlBase + '/user',
+      instance: authUrlBase + '/instance',
     }
   },
   defaultRestOptions: (state, getters) => {

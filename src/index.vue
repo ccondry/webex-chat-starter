@@ -81,6 +81,7 @@ export default {
       'isProvisionStarted',
       'isProduction',
       'userDemoConfig'
+      // 'instance'
     ]),
     isLoading () {
       return this.loading.app.environment ||
@@ -134,6 +135,8 @@ export default {
     this.getDemoBaseConfig()
     // get demo verticals list
     this.getVerticals()
+    // get the dCloud session ID and datacenter
+    this.getInstance()
   },
 
   methods: {
@@ -144,7 +147,8 @@ export default {
       'login',
       'getDemoBaseConfig',
       'getVerticals',
-      'getUser'
+      'getUser',
+      'getInstance'
     ])
   }
 }

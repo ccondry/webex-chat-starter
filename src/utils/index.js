@@ -26,6 +26,7 @@ export const getUrlQueryParams = function () {
   }
   return query
 }
+
 // helper function to append query parameters to a URL for fetch
 export const addUrlQueryParams = function (endpoint, params) {
   let url = endpoint
