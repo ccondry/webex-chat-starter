@@ -13,7 +13,8 @@ function parseJwt (token) {
 
 const state = {
   jwt: null,
-  user: null
+  user: null,
+  provision: null
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
   },
   [types.SET_USER] (state, data) {
     state.user = data
+  },
+  [types.SET_USER_PROVISION] (state, data) {
+    state.provision = data
   }
 }
 
@@ -152,6 +156,21 @@ const actions = {
       url: getters.endpoints.user,
       message: 'get user details',
       mutation: types.SET_USER
+    })
+  },
+  getProvision ({dispatch, getters}) {
+    dispatch('fetch', {
+      group: 'user',
+      type: 'provision',
+      url: getters.endpoints.getProvision,
+      message: 'get user provision status',
+      mutation: types.SET_USER_PROVISION,
+      options: {
+        query: {
+          demo: 'webex',
+          version: 'v4prod'
+        }
+      }
     })
   },
   async saveUserDemoConfig ({dispatch, getters}, body) {

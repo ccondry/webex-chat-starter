@@ -11,7 +11,11 @@ const getters = {
     } else {
       // development
       authUrlBase = 'http://localhost:3032/api/v1/auth'
-      urlBase = 'http://localhost:4005/api/v1/webex-v4'
+      // urlBase = 'http://localhost:4005/api/v1/webex-v4'
+
+      // use production APIs
+      authUrlBase = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth'
+      urlBase = 'https://dcloud-collab-toolbox.cxdemo.net/api/v1/webex-v4'
     }
 
     return {
@@ -22,6 +26,7 @@ const getters = {
       demoBaseConfig: mmUrlBase + '/demo',
       vertical: mmUrlBase + '/verticals',
       provision: urlBase + '/provision',
+      getProvision: authUrlBase + '/provision',
       userDemoConfig: authUrlBase + '/user/demo',
       user: authUrlBase + '/user',
       instance: authUrlBase + '/instance',

@@ -79,9 +79,7 @@ export default {
       'working',
       'isProvisioned',
       'isProvisionStarted',
-      'isProduction',
-      'userDemoConfig'
-      // 'instance'
+      'isProduction'
     ]),
     isLoading () {
       return this.loading.app.environment ||
@@ -137,6 +135,8 @@ export default {
     this.getVerticals()
     // get the dCloud session ID and datacenter
     this.getInstance()
+    // get provision info, and mark last access time
+    this.getProvision()
   },
 
   methods: {
@@ -148,7 +148,8 @@ export default {
       'getDemoBaseConfig',
       'getVerticals',
       'getUser',
-      'getInstance'
+      'getInstance',
+      'getProvision'
     ])
   }
 }
