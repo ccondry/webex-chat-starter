@@ -3,6 +3,12 @@
 Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
+# 2021.2.10-1
+
+### Features
+* **Admin:** Remove voice queue ID setting and add provision status setting.
+
+
 # 2021.2.10
 
 ### Features
