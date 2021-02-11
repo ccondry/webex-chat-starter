@@ -11,8 +11,8 @@
     </b-field>
 
     <!-- queue -->
-    <b-field label="Voice Queue ID">
-      <b-input v-model="model.queueId" />
+    <b-field label="Provision Status">
+      <b-input v-model="model.provision" />
     </b-field>
 
     <!-- chat template -->
