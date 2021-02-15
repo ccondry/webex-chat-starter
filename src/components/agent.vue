@@ -44,7 +44,9 @@
           type="is-success"
           rounded
           expanded
-          @click="clickAgentPortal"
+          :href="agentPortalUrl"
+          tag="a"
+          target="_blank"
           >
             Go to Agent Desktop
           </b-button>
@@ -54,7 +56,9 @@
           type="is-success"
           rounded
           expanded
-          @click="clickWebexAdminPortal"
+          :href="webexAdminPortalUrl"
+          tag="a"
+          target="_blank"
           >
             Go to Control Hub
           </b-button>
@@ -97,18 +101,6 @@ export default {
     ]),
     clickCopy (string, type) {
       this.copyToClipboard({string, type})
-    },
-    clickAgentPortal (e) {
-      // open agent portal in new tab
-      window.open(this.agentPortalUrl, '_blank')
-    },
-    clickWebexAdminPortal (e) {
-      // open new admin portal in new tab
-      window.open(this.webexAdminPortalUrl, '_blank')
-    },
-    clickCjpAdminPortal (e) {
-      // open old admin portal in new tab
-      window.open(this.cjpAdminPortalUrl, '_blank')
     }
   }
 }
