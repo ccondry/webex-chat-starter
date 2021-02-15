@@ -41,7 +41,7 @@ export default {
     ]),
     buttonText () {
       if (this.working.user.provision) {
-        return `Working - ${provisionTime}`       
+        return `Working...`       
       } else {
         return 'Yes, Provision Me Anyway'
       }
