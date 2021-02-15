@@ -111,7 +111,7 @@ const actions = {
   },
   async deprovisionUser ({dispatch, getters}, password) {
     try {
-      await dispatch('saveUserDemoConfig', {queueId: null, templateId: null, orgId: null})
+      await dispatch('saveUserDemoConfig', {queueId: null, templateId: null, orgId: null, provision: null})
       dispatch('getUser')
     } catch (e) {
       console.log(e)
