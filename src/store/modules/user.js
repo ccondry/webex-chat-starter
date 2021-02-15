@@ -78,7 +78,7 @@ const getters = {
   isProvisionStarted: (state, getters) => {
     // provision started if user demo config has any values
     try {
-      return getters.userDemoConfig.orgId.length > 0
+      return getters.userDemoConfig.provision === 'started'
     } catch (e) {
       return false
     }
