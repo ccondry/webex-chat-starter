@@ -68,7 +68,7 @@ const getters = {
     }
   },
   isProvisioned: (state, getters) => {
-    // user provision is complete if chat template ID and voice queue ID exist
+    // user provision is complete
     try {
       return getters.userDemoConfig.provision === 'complete'
     } catch (e) {
@@ -76,7 +76,7 @@ const getters = {
     }
   },
   isProvisionStarted: (state, getters) => {
-    // provision started if user demo config has any values
+    // provision started
     try {
       return getters.userDemoConfig.provision === 'started'
     } catch (e) {
