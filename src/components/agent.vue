@@ -90,8 +90,7 @@ export default {
   computed: {
     ...mapGetters([
       'agentPortalUrl',
-      'webexAdminPortalUrl',
-      'cjpAdminPortalUrl'
+      'webexAdminPortalUrl'
     ])
   },
   
