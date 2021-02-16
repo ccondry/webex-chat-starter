@@ -15,7 +15,7 @@
         <welcome />
 
         <!-- Provision -->
-        <provision v-if="!isProvisionStarted" />
+        <provision v-if="!isProvisionStarted && !isProvisioned" />
 
         <!-- Provision In Progress -->
         <provision-progress v-if="isProvisionStarted && !isProvisioned" />
