@@ -62,27 +62,11 @@ const getters = {
     } catch (e) {
       return {}
     }
-  },
-  isProvisioned: (state, getters) => {
-    // user provision is complete
-    try {
-      return getters.userDemoConfig.provision === 'complete'
-    } catch (e) {
-      return false
-    }
-  },
-  isProvisionStarted: (state, getters) => {
-    // provision started
-    try {
-      return getters.userDemoConfig.provision === 'started'
-    } catch (e) {
-      return false
-    }
   }
 }
 
 const actions = {
-  async logout ({dispatch, commit, getters}) {
+  async logout ({dispatch, getters}) {
     try {
       const response = await dispatch('fetch', {
         group: 'user',
@@ -101,50 +85,6 @@ const actions = {
         // remove JWT
         dispatch('unsetJwt')
       }
-    } catch (e) {
-      console.log(e)
-    }
-  },
-  async deprovisionUser ({dispatch, getters}, password) {
-    try {
-      await dispatch('saveUserDemoConfig', {provision: 'deleted'})
-      dispatch('getUser')
-    } catch (e) {
-      console.log(e)
-    }
-  },
-  resetPassword ({dispatch, getters}, password) {
-    dispatch('fetch', {
-      group: 'user',
-      type: 'password',
-      url: getters.endpoints.password,
-      options: {
-        method: 'POST',
-        body: {
-          password
-        }
-      },
-      message: 'reset password'
-    })
-  },
-  async provisionUser ({dispatch, getters}) {
-    try {
-      // start user provision
-      await dispatch('fetch', {
-        group: 'user',
-        type: 'provision',
-        message: 'provision user',
-        url: getters.endpoints.provision,
-        options: {
-          method: 'POST',
-          body: {
-            demo: 'webex',
-            version: 'v4prod'
-          }
-        }
-      })
-      // update user data
-      dispatch('getUser')
     } catch (e) {
       console.log(e)
     }
@@ -208,7 +148,7 @@ const actions = {
       // development - prompt for JWT
       Dialog.prompt({
         title: 'Log In',
-        message: `Enter your JWT:`,
+        message: 'Enter your JWT:',
         onConfirm: (jwt) => {
           dispatch('setJwt', jwt)
         },
@@ -219,7 +159,7 @@ const actions = {
       })
     }
   },
-  async checkJwt ({dispatch, getters}) {
+  async checkJwt ({dispatch}) {
     dispatch('setWorking', {group: 'user', type: 'login', value: true})
     // check jwt in browser local storage
     const jwt = window.localStorage.getItem('jwt')
