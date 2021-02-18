@@ -6,9 +6,6 @@
         UI Version {{ uiVersion }}
       </small>
       <small>
-        API Version {{ apiVersion }}
-      </small>
-      <small>
         Auth API Version {{ authApiVersion }}
       </small>
       <small>
@@ -30,7 +27,6 @@ export default {
   computed: {
     ...mapGetters([
       'uiVersion',
-      'apiVersion',
       'authApiVersion'
     ])
   }

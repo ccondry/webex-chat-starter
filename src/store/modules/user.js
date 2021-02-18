@@ -131,16 +131,21 @@ const actions = {
       message: 'reset password'
     })
   },
-  async provisionUser ({commit, dispatch, getters}) {
+  async provisionUser ({dispatch, getters}) {
     try {
+      // start user provision
       await dispatch('fetch', {
         group: 'user',
         type: 'provision',
+        message: 'provision user',
         url: getters.endpoints.provision,
         options: {
-          method: 'POST'
-        },
-        message: 'provision user'
+          method: 'POST',
+          body: {
+            demo: 'webex',
+            version: 'v4prod'
+          }
+        }
       })
       // update user data
       dispatch('getUser')
@@ -161,7 +166,7 @@ const actions = {
     dispatch('fetch', {
       group: 'user',
       type: 'provision',
-      url: getters.endpoints.getProvision,
+      url: getters.endpoints.provision,
       message: 'get user provision status',
       mutation: types.SET_USER_PROVISION,
       options: {

@@ -125,8 +125,6 @@ export default {
     // try to find and validate user's JWT from localStorage,
     // or start the SSO login process to get one
     this.checkJwt()
-    // get the REST API version
-    this.getApiVersion()
     // get the Authentication REST API version
     this.getAuthApiVersion()
     // get the demo base configuration for webex-v4
@@ -143,7 +141,6 @@ export default {
     ...mapActions([
       'checkJwt',
       'getAuthApiVersion',
-      'getApiVersion',
       'login',
       'getDemoBaseConfig',
       'getVerticals',

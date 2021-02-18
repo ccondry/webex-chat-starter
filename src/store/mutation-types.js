@@ -2,8 +2,6 @@
 export const SET_WORKING = 'SET_WORKING'
 export const SET_LOADING = 'SET_LOADING'
 
-// REST API version
-export const SET_API_VERSION = 'SET_API_VERSION'
 // Authentication REST API version
 export const SET_AUTH_API_VERSION = 'SET_AUTH_API_VERSION'
 

@@ -22,7 +22,6 @@ const state = {
   isProduction: process.env.NODE_ENV === 'production',
   demoEnvironment: {},
   uiVersion: version,
-  apiVersion: 'Loading...',
   authApiVersion: 'Loading...'
 }
 
@@ -32,7 +31,6 @@ const getters = {
   working: state => state.working,
   demoEnvironment: state => state.demoEnvironment,
   uiVersion: state => state.uiVersion,
-  apiVersion: state => state.apiVersion,
   authApiVersion: state => state.authApiVersion
 }
 
@@ -62,9 +60,6 @@ const mutations = {
     } else {
       state.loading[data.group][data.type] = data.value
     }
-  },
-  [types.SET_API_VERSION] (state, data) {
-    state.apiVersion = data.version
   },
   [types.SET_AUTH_API_VERSION] (state, data) {
     state.authApiVersion = data.version
@@ -99,7 +94,7 @@ const actions = {
       // set JWT auth header by default
       options.headers['Authorization'] = options.headers['Authorization'] || 'Bearer ' + getters.jwt
       // set instant demo instance name
-      options.headers['Instance'] = getters.instanceName
+      // options.headers['Instance'] = getters.instanceName
       // stringify body if it is an object
       if (typeof options.body === 'object') {
         options.body = JSON.stringify(options.body)
@@ -174,16 +169,6 @@ const actions = {
   },
   setLoading ({commit}, {group, type, value = true}) {
     commit(types.SET_LOADING, {group, type, value})
-  },
-  async getApiVersion ({commit, dispatch, getters}) {
-    // get REST API version
-    dispatch('fetch', {
-      group: 'app',
-      type: 'version',
-      url: getters.endpoints.version,
-      message: 'get REST API version',
-      mutation: types.SET_API_VERSION
-    })
   },
   getAuthApiVersion ({dispatch, getters}) {
     // get Auth REST API version
