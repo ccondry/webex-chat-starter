@@ -15,9 +15,9 @@ import Buefy from 'buefy/src'
 Vue.use(Buefy)
 
 // load panel component globally
-Vue.component('panel', panel)
+Vue.component('Panel', panel)
 // load clipboard copy button component globally
-Vue.component('copy', copy)
+Vue.component('Copy', copy)
 
 new Vue({
   render: h => h(app),
