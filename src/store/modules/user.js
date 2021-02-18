@@ -29,7 +29,7 @@ const getters = {
   user: state => state.user,
   userDemoConfig: state => {
     try {
-      return state.user.demo['cloud-configprod'] || {}
+      return state.user.demo['cloud-config'] || {}
     } catch (e) {
       return {}
     }
