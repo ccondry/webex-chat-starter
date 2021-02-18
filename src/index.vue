@@ -9,7 +9,7 @@
     >
       <section class="main">
         <!-- loading -->
-        <b-loading :active="isLoading || isWorking" />
+        <b-loading :active="isProduction && (isLoading || isWorking)" />
 
         <!-- welcome -->
         <welcome />
