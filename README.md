@@ -1,5 +1,5 @@
 # cloud-config-toolbox-ui
-The dCloud Webex Contact Center v4 Instant Demo web portal UI project. It is
+The dCloud Colud Configuration web portal UI project. It is
 built on Vue.js 2.6 (including vue-router and vuex), using Webpack 4.
 
 ## Development
@@ -15,7 +15,7 @@ script for this will only be added to index.html in development mode.
 ### JWT
 The Sign In function on the development website will prompt you for a JWT,
 since it cannot redirect you the real SSO provider. You can get a valid JWT by
-going to https://dcloud-collab-toolbox-lon.cisco.com and logging in, then
+going to https://dcloud-collab-toolbox-rtp.cisco.com and logging in, then
 opening your browser javascript console and entering `localStorage.jwt`.
 
 ## Production
