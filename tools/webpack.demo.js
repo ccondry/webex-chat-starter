@@ -8,7 +8,8 @@ const TerserPlugin = require('terser-webpack-plugin')
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 const config = require('./config');
 
@@ -123,7 +124,7 @@ const webpackConfig = {
         }
       }
     }),
-    // new BundleAnalyzerPlugin()
+    isProd ? function () {} : new BundleAnalyzerPlugin()
   ],
   optimization: {
     splitChunks: {
