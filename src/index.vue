@@ -82,7 +82,7 @@ export default {
       'checkJwt',
       'getApiVersion',
       'login',
-      'getUser',
+      'getUser'
     ])
   }
 }
