@@ -8,14 +8,14 @@ const getters = {
       authUrlBase = '/api/v1/auth'
     } else {
       // development
-      authUrlBase = 'http://localhost:3032/api/v1/auth'
+      // authUrlBase = 'http://localhost:3032/api/v1/auth'
 
       // use production APIs
-      // authUrlBase = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth'
+      authUrlBase = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth'
     }
 
     return {
-      webex: authUrlBase + '/resource/joinWebexSupportRoom',
+      webex: authUrlBase + '/resource/joinGeneralSupportRoom',
       authVersion: authUrlBase + '/version',
       logout: authUrlBase + '/logout',
       demoBaseConfig: mmUrlBase + '/demo',

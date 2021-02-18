@@ -1,19 +1,16 @@
 {
-  "name": "webex-v4-toolbox-ui",
-  "description": "UI for the dCloud Webex v4 Instant Demo Toolbox",
+  "name": "cloud-config-toolbox-ui",
+  "description": "UI for the dCloud Cloud Configuration Toolbox",
   "version": "2021.2.18",
   "author": "Coty Condry <ccondry@cisco.com>",
   "main": "dist/js/index.common.js",
   "unpkg": "dist/js/index.js",
   "scripts": {
     "build": "yarn dist",
-    "build:test": "yarn dist:test",
     "clean": "rimraf dist",
-    "dist2": "cross-env NODE_ENV=development PLAY_ENV=true webpack --config tools/webpack.demo.js",
     "dist": "cross-env NODE_ENV=production webpack --config tools/webpack.demo.js",
     "dist:test": "yarn dist && node tools/test.js",
     "lint": "eslint src --quiet --ext .js,.vue",
-    "prepublishOnly": "yarn build",
     "start": "cross-env NODE_ENV=development PLAY_ENV=true webpack-dev-server --config tools/webpack.demo.js"
   },
   "keywords": [
@@ -25,22 +22,22 @@
     "pcce",
     "uccx",
     "webex",
-    "cjp"
+    "cjp",
+    "toolbox"
   ],
   "homepage": "https://dcloud-collab-toolbox-rtp.cisco.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ccondry/webex-v4-toolbox-ui"
+    "url": "https://github.com/ccondry/cloud-config-toolbox-ui"
   },
   "bugs": {
-    "url": "https://github.com/ccondry/webex-v4-toolbox-ui/issues"
+    "url": "https://github.com/ccondry/cloud-config-toolbox-ui/issues"
   },
   "license": "MIT",
   "dependencies": {
     "@mdi/font": "^5.5.55",
-    "@momentum-ui/core": "^19.9.18",
-    "buefy": "https://github.com/ccondry/buefy.git#dev",
-    "bulma": "https://github.com/ccondry/bulma.git",
+    "buefy": "^0.9.4",
+    "bulma": "^0.9.2",
     "moment": "^2.29.1",
     "vue": "2.6.12",
     "vue-fragment": "^1.5.1",
@@ -95,7 +92,6 @@
     "i": "^0.3.6",
     "json-loader": "^0.5.7",
     "json-templater": "^1.0.4",
-    "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.11.0",
     "npm": "^6.10.0",

@@ -7,5 +7,3 @@ selenium-debug.log
 test/unit/coverage
 test/e2e/reports
 .env
-package-lock.json
-yarn.lock

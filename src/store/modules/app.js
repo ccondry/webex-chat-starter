@@ -22,7 +22,7 @@ const state = {
   isProduction: process.env.NODE_ENV === 'production',
   demoEnvironment: {},
   uiVersion: version,
-  authApiVersion: 'Loading...'
+  apiVersion: 'Loading...'
 }
 
 const getters = {
@@ -31,7 +31,7 @@ const getters = {
   working: state => state.working,
   demoEnvironment: state => state.demoEnvironment,
   uiVersion: state => state.uiVersion,
-  authApiVersion: state => state.authApiVersion
+  apiVersion: state => state.apiVersion
 }
 
 const mutations = {
@@ -62,7 +62,7 @@ const mutations = {
     }
   },
   [types.SET_AUTH_API_VERSION] (state, data) {
-    state.authApiVersion = data.version
+    state.apiVersion = data.version
   }
 }
 
@@ -170,7 +170,7 @@ const actions = {
   setLoading ({commit}, {group, type, value = true}) {
     commit(types.SET_LOADING, {group, type, value})
   },
-  getAuthApiVersion ({dispatch, getters}) {
+  getApiVersion ({dispatch, getters}) {
     // get Auth REST API version
     dispatch('fetch', {
       group: 'app',

@@ -24,13 +24,13 @@ else
       yarn build
       if [ $? -eq 0 ]; then
         echo "yarn build successful. removing old www files..."
-        rm -rf /var/www/toolbox/webex-v4/*
+        rm -rf /var/www/toolbox/cloud-config/*
         echo "copying dist files to www folder..."
-        cp -rf dist/* /var/www/toolbox/webex-v4/
+        cp -rf dist/* /var/www/toolbox/cloud-config/
         if [ $? -eq 0 ]; then
-          echo "successfully installed webex-v4-toolbox-ui website files"
+          echo "successfully installed cloud-config-toolbox-ui website files"
         else
-          echo "failed to install webex-v4-toolbox-ui website files"
+          echo "failed to install cloud-config-toolbox-ui website files"
         fi
       else
         echo "yarn build failed. help me."

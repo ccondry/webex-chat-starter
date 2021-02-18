@@ -1,4 +1,4 @@
-# webex-v4-toolbox-ui Change Log
+# cloud-config-toolbox-ui Change Log
 
 Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
@@ -6,29 +6,4 @@ where X is the revision number
 # 2021.2.18
 
 ### Features
-* **Provision:** Update REST path for provisioning API. Improve display and response.
-* **Agents:** Make the buttons standard copyable links.
-
-
-# 2021.2.10-1
-
-### Features
-* **Admin:** Remove voice queue ID setting and add provision status setting.
-
-
-# 2021.2.10
-
-### Features
-* **Provision:** Update provision status checking to match API side.
-
-
-# 2020.11.24
-
-### Features
-* **Demo Website:** fix demo website link to use session ID and datacenter
-
-
-# 2020.11.20
-
-### Features
-* **Created:** created working provision toolbox
+* **Created:** Forked from webex-v4-toolbox-ui version 2021.2.18

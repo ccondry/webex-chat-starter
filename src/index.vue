@@ -14,23 +14,8 @@
         <!-- welcome -->
         <welcome />
 
-        <!-- Provision -->
-        <provision v-if="!isProvisionStarted && !isProvisioned" />
-
-        <!-- Provision In Progress -->
-        <provision-progress v-if="isProvisionStarted && !isProvisioned" />
-
-        <!-- Agents and Supervisors -->
-        <agents v-if="isProvisioned" />
-
-        <!-- Demo Website -->
-        <demo-website v-if="isProvisioned" />
-
-        <!-- Reprovision -->
-        <reprovision v-if="isProvisioned" />
-
-        <!-- Admin -->
-        <admin v-if="isAdmin || isAdminSu" />
+        <!-- Cisco Answers KBs -->
+        <cisco-answers />
 
         <!-- debug info -->
         <!-- <debug v-if="!isProduction" /> -->
@@ -43,51 +28,42 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
-import Navbar from './components/navbar'
-import Welcome from './components/welcome'
-import Provision from './components/provision'
-import ProvisionProgress from './components/provision-progress'
-import Agents from './components/agents'
-import DemoWebsite from './components/demo-website'
-import Reprovision from './components/reprovision'
-import AppFooter from './components/app-footer'
-// import Debug from './components/debug'
-import Admin from './components/admin'
+import { mapActions, mapGetters } from 'vuex'
+import navbar from './components/navbar'
+import welcome from './components/welcome'
+import ciscoAnswers from './components/cisco-answers'
+import demoWebsite from './components/demo-website'
+import reprovision from './components/reprovision'
+import appFooter from './components/app-footer'
+// import debug from './components/debug'
+import admin from './components/admin'
 
 export default {
   components: {
-    Navbar,
-    Welcome,
-    Provision,
-    ProvisionProgress,
-    Agents,
-    DemoWebsite,
-    Reprovision,
-    AppFooter,
-    // Debug,
-    Admin
+    navbar,
+    welcome,
+    ciscoAnswers,
+    demoWebsite,
+    reprovision,
+    appFooter,
+    // debug,
+    admin
   },
 
   computed: {
     ...mapGetters([
       'isLoggedIn',
-      'isAdmin',
-      'isAdminSu',
       'jwtUser',
       'loading',
       'working',
-      'isProvisioned',
-      'isProvisionStarted',
       'isProduction'
     ]),
     isLoading () {
       return this.loading.app.environment ||
-      this.loading.user.provision ||
       this.loading.user.details
     },
     isWorking () {
-      return this.working.user.provision
+      return false
     }
   },
 
@@ -99,25 +75,6 @@ export default {
         // user just logged out. make them log in again.
         this.login()
       }
-    },
-    isProvisionStarted (val, oldVal) {
-      if (val && !oldVal) {
-        // provision was started
-        // clear any previous exisitng interval, just in case
-        if (this.interval) {
-          clearInterval(this.interval)
-        }
-        // start interval to refresh provision status until its done
-        this.interval = setInterval(() => {
-          this.getUser()
-        }, 15 * 1000)
-      } 
-    },
-    isProvisioned (val, oldVal) {
-      if (val && !oldVal) {
-        // provision completed. stop interval.
-        clearInterval(this.interval)
-      }
     }
   },
 
@@ -126,24 +83,17 @@ export default {
     // or start the SSO login process to get one
     this.checkJwt()
     // get the Authentication REST API version
-    this.getAuthApiVersion()
-    // get the demo base configuration for webex-v4
-    this.getDemoBaseConfig()
-    // get demo verticals list
-    this.getVerticals()
-    // get the dCloud session ID and datacenter
-    this.getInstance()
+    this.getApiVersion()
+    // get the full user object
+    this.getUser()
   },
 
   methods: {
     ...mapActions([
       'checkJwt',
-      'getAuthApiVersion',
+      'getApiVersion',
       'login',
-      'getDemoBaseConfig',
-      'getVerticals',
       'getUser',
-      'getInstance'
     ])
   }
 }

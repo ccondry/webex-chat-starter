@@ -2,8 +2,8 @@
   <panel :title="`Welcome ${jwtUser.firstName}!`" aria-id="welcome">
     <p>
       Welcome to the dCloud
-      <strong>Webex Contact Center v4</strong>
-      Instant Demo Toolbox!
+      <strong>Cloud Configuration</strong>
+      Toolbox!
       <br>
       Join our Webex Teams support room to get help, ask questions, and
       suggest new features:

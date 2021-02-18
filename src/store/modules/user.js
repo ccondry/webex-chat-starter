@@ -29,7 +29,7 @@ const getters = {
   user: state => state.user,
   userDemoConfig: state => {
     try {
-      return state.user.demo['webex-v4prod'] || {}
+      return state.user.demo['cloud-configprod'] || {}
     } catch (e) {
       return {}
     }
@@ -168,7 +168,7 @@ const actions = {
           method: 'POST',
           body,
           query: {
-            id: 'webex-v4prod'
+            id: 'cloud-configprod'
           }
         },
         message: 'save user demo configuration'

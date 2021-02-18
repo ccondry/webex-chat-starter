@@ -6,16 +6,16 @@ if [ $? -eq 0 ]; then
   yarn build
   while [ $? != 0 ]
   do
-    echo "failed to build webex-v4-toolbox-ui website files. trying again..."
+    echo "failed to build cloud-config-toolbox-ui website files. trying again..."
     yarn build
   done
   echo "yarn build successful. copying dist files to www folder..."
-  mkdir -p /var/www/toolbox/webex-v4
-  cp -rf dist/* /var/www/toolbox/webex-v4/
+  mkdir -p /var/www/toolbox/cloud-config
+  cp -rf dist/* /var/www/toolbox/cloud-config/
   if [ $? -eq 0 ]; then
-    echo "successfully installed webex-v4-toolbox-ui website files"
+    echo "successfully installed cloud-config-toolbox-ui website files"
   else
-    echo "failed to install webex-v4-toolbox-ui website files"
+    echo "failed to install cloud-config-toolbox-ui website files"
   fi
 else
   echo "yarn failed"
