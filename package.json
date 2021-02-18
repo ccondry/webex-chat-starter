@@ -1,7 +1,7 @@
 {
   "name": "webex-v4-toolbox-ui",
   "description": "UI for the dCloud Webex v4 Instant Demo Toolbox",
-  "version": "2021.2.10-1",
+  "version": "2021.2.18",
   "author": "Coty Condry <ccondry@cisco.com>",
   "main": "dist/js/index.common.js",
   "unpkg": "dist/js/index.js",

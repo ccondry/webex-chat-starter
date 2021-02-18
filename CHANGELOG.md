@@ -3,6 +3,13 @@
 Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
+# 2021.2.18
+
+### Features
+* **Provision:** Update REST path for provisioning API. Improve display and response.
+* **Agents:** Make the buttons standard copyable links.
+
+
 # 2021.2.10-1
 
 ### Features
