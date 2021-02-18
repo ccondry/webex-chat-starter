@@ -1,6 +1,4 @@
-import {
-  DialogProgrammatic as Dialog,
-} from 'buefy/src'
+import {DialogProgrammatic as Dialog} from 'buefy/src'
 
 import * as types from '../mutation-types'
 

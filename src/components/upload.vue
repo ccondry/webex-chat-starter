@@ -1,36 +1,22 @@
 <template>
   <section>
-    <b-field class="file">
-      <b-upload v-model="file" expanded>
-        <a class="button is-primary is-fullwidth">
-          <b-icon icon="upload" />
-          <span>{{ file.name || "Click to upload" }}</span>
-        </a>
-      </b-upload>
-    </b-field>
+    <b-loading :active="isWorking" :is-full-page="false" />
     <b-field>
-      <b-upload v-model="dropFiles"
-      multiple
+      <b-upload v-model="file"
       drag-drop
       expanded
+      accept=".csv"
       >
         <section class="section">
           <div class="content has-text-centered">
             <p>
               <b-icon icon="upload" size="is-large" />
             </p>
-            <p>Drop your files here or click to upload</p>
+            <p>Upload your Cisco Answers KB Base CSV file here</p>
           </div>
         </section>
       </b-upload>
     </b-field>
-
-    <div class="tags">
-      <span v-for="(f, index) in dropFiles" :key="index" class="tag is-primary">
-        {{ f.name }}
-        <button class="delete is-small" type="button" @click="deleteDropFile(index)" />
-      </span>
-    </div>
   </section>
 </template>
 
@@ -38,13 +24,38 @@
 export default {
   data () {
     return {
-      file: {},
-      dropFiles: []
+      file: null,
+      isWorking: false
     }
   },
-  methods: {
-    deleteDropFile (index) {
-      this.dropFiles.splice(index, 1)
+
+  watch: {
+    file (val) {
+      if (!val) {
+        return
+      }
+      this.$buefy.dialog.confirm({
+        title: 'Upload KB File?',
+        message: `Are you sure you want to upload <b>${this.file.name}</b> as a Cisco Answers knowledge base?`,
+        type: 'is-success',
+        rounded: true,
+        confirmText: 'Upload',
+        onConfirm: () => {
+          // TODO implement real upload here
+          this.isWorking = true
+          setTimeout(() => {
+            this.isWorking = false
+            this.$buefy.toast.open({
+              type: 'is-success',
+              message: 'Uploaded file!'
+            })
+            this.file = null
+          }, 2000)
+        },
+        onCancel: () => {
+          this.file = null
+        }
+      })
     }
   }
 }

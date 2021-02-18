@@ -33,9 +33,9 @@ $link: $primary;
 // import bulma source
 @import "~bulma";
 
-// import '~buefy/dist/buefy.css';
+@import '~buefy/dist/buefy.css';
 // import buefy source
-@import "~buefy/src/scss/buefy";
+// @import "~buefy/src/scss/buefy";
 
 $mdi-font-path: '~@mdi/font/fonts';
 // import material design icons

@@ -1,14 +1,16 @@
 <template>
   <panel title="Cisco Answers" aria-id="agents">
-    Upload Knowledge Base
+    <upload />
   </panel>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import Upload from './upload'
 
 export default {
   components: {
+    Upload
   },
 
   computed: {
