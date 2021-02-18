@@ -26,13 +26,13 @@ const actions = {
       })
       Toast.open({
         type: 'is-success',
-        message: `You have been added to the support space`
+        message: 'You have been added to the support space'
       })
     } catch (e) {
       if (e.status === 409) {
         Toast.open({
           type: 'is-success',
-          message: `You have been added to the support space`
+          message: 'You have been added to the support space'
         })
       } else {
         Toast.open({

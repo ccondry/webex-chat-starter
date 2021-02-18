@@ -2,7 +2,7 @@
   <panel aria-id="version-copyright" style="border-radius: 6px;">
     <div style="display: flex; flex-direction: column; align-items: center; ">
       <cisco-logo style="width: 4rem; height: 4rem;" />
-      <small> 
+      <small>
         UI Version {{ uiVersion }}
       </small>
       <small>

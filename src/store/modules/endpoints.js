@@ -23,7 +23,7 @@ const getters = {
       provision: authUrlBase + '/provision',
       userDemoConfig: authUrlBase + '/user/demo',
       user: authUrlBase + '/user',
-      instance: authUrlBase + '/instance',
+      instance: authUrlBase + '/instance'
     }
   },
   defaultRestOptions: (state, getters) => {

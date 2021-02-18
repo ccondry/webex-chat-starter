@@ -27,7 +27,7 @@ const getters = {
   isLocked: (state, getters) => {
     return getters.demoBaseConfig.locked === true
   },
-  // which vertical the demo website is set to 
+  // which vertical the demo website is set to
   verticals: state => state.verticals,
   // the customer-side demo website link
   brandDemoLink (state, getters) {
@@ -94,7 +94,7 @@ const actions = {
       mutation: types.SET_INSTANCE,
       message: 'get dCloud session information'
     })
-  },
+  }
 }
 
 export default {

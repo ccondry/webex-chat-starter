@@ -37,7 +37,7 @@ export default {
     clickJoinSupportRoom () {
       this.$buefy.dialog.prompt({
         title: 'Join Webex Teams Support Room',
-        message: `What email address do you use for Webex Teams?`,
+        message: 'What email address do you use for Webex Teams?',
         rounded: true,
         confirmText: 'Submit',
         type: 'is-success',

@@ -55,7 +55,7 @@ export default {
       'isAdmin'
     ])
   },
-  
+
   methods: {
     ...mapActions([
       'logout'

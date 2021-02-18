@@ -6,12 +6,12 @@ export const sleep = function (ms) {
 // convert camelCase string to Title Case
 export const camelToTitle = function (text) {
   try {
-    const result = text.replace( /([A-Z])/g, ' $1')
+    const result = text.replace(/([A-Z])/g, ' $1')
     return result.charAt(0).toUpperCase() + result.slice(1)
   } catch (e) {
     // return original string if we failed to do character replacements
     return text
-  }  
+  }
 }
 
 export const getUrlQueryParams = function () {
@@ -54,7 +54,7 @@ export const fetch = async function (url, options = {}) {
   // set content type to JSON by default
   options.headers = options.headers || {}
   options.headers['Content-Type'] = options.headers['Content-Type'] || 'application/json'
-  
+
   // stringify body if object
   if (typeof options.body === 'object') {
     options.body = JSON.stringify(options.body)
