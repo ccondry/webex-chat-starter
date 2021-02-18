@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import App from './index.vue'
+import app from './index.vue'
 import store from './store'
 // common panel component
-import Panel from './components/panel'
-import Copy from './components/copy'
+import panel from './components/panel'
+import copy from './components/copy'
 import './style.scss'
 
 // use 'buefy/src' when running from git,
@@ -15,11 +15,11 @@ import Buefy from 'buefy/src'
 Vue.use(Buefy)
 
 // load panel component globally
-Vue.component('panel', Panel)
+Vue.component('panel', panel)
 // load clipboard copy button component globally
-Vue.component('copy', Copy)
+Vue.component('copy', copy)
 
 new Vue({
-  render: h => h(App),
+  render: h => h(app),
   store
 }).$mount('#app')
