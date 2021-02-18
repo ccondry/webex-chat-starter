@@ -73,16 +73,13 @@ export default {
     this.checkJwt()
     // get the Authentication REST API version
     this.getApiVersion()
-    // get the full user object
-    this.getUser()
   },
 
   methods: {
     ...mapActions([
       'checkJwt',
       'getApiVersion',
-      'login',
-      'getUser'
+      'login'
     ])
   }
 }
