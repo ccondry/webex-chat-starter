@@ -2,7 +2,7 @@
   <panel :title="`Welcome ${jwtUser.firstName}!`" aria-id="welcome">
     <p>
       Welcome to the dCloud
-      <strong>Cloud Configuration</strong>
+      <strong>Demo Configurations</strong>
       Toolbox!
     </p>
   </panel>
