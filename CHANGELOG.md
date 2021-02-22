@@ -3,6 +3,12 @@
 Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
+# 2021.2.22
+
+### Features
+* **Cisco Answers:** Implement real file upload for Cisco Answers KB CSV.
+
+
 # 2021.2.18-1
 
 ### Features
@@ -10,7 +16,7 @@ where X is the revision number
 form.
 
 
-# 2021.2.18-1
+# 2021.2.18
 
 ### Features
 * **Created:** Forked from webex-v4-toolbox-ui version 2021.2.18
