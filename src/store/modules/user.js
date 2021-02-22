@@ -93,29 +93,9 @@ const actions = {
       type: 'details',
       url: getters.endpoints.user,
       message: 'get user details',
-      mutation: types.SET_USER
+      mutation: types.SET_USER,
+      showNotification: false
     })
-  },
-  async saveUserDemoConfig ({dispatch, getters}, body) {
-    try {
-      await dispatch('fetch', {
-        group: 'user',
-        type: 'demoConfig',
-        url: getters.endpoints.userDemoConfig,
-        options: {
-          method: 'POST',
-          body,
-          query: {
-            id: 'cloud-configprod'
-          }
-        },
-        message: 'save user demo configuration'
-      })
-      // refresh state data
-      dispatch('getUser')
-    } catch (e) {
-      console.log(e.message)
-    }
   },
   setJwt ({commit, dispatch}, jwt) {
     try {

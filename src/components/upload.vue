@@ -21,11 +21,22 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      file: null,
-      isWorking: false
+      file: null
+    }
+  },
+
+  computed: {
+    ...mapGetters([
+      'loading',
+      'working'
+    ]),
+    isWorking () {
+      return this.working.user.file
     }
   },
 
@@ -34,29 +45,40 @@ export default {
       if (!val) {
         return
       }
+
+      // set up file reader
+      const reader = new window.FileReader()
+      reader.onload = (e) => {
+        const data = e.currentTarget.result
+        this.uploadFile({
+          name: this.file.name,
+          data
+        }).then(() => {
+          this.file = null
+        })
+      }
+      // make user confirm they want to upload the file
       this.$buefy.dialog.confirm({
-        title: 'Upload KB File?',
+        title: 'Confirm Upload',
         message: `Are you sure you want to upload <b>${this.file.name}</b> as a Cisco Answers knowledge base?`,
         type: 'is-success',
         rounded: true,
         confirmText: 'Upload',
         onConfirm: () => {
-          // TODO implement real upload here
-          this.isWorking = true
-          setTimeout(() => {
-            this.isWorking = false
-            this.$buefy.toast.open({
-              type: 'is-success',
-              message: 'Uploaded file!'
-            })
-            this.file = null
-          }, 2000)
+          // read the file data and upload the file
+          reader.readAsDataURL(this.file)
         },
         onCancel: () => {
           this.file = null
         }
       })
     }
+  },
+
+  methods: {
+    ...mapActions([
+      'uploadFile'
+    ])
   }
 }
 </script>
