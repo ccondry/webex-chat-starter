@@ -54,7 +54,18 @@ export default {
           name: this.file.name,
           data
         }).then(() => {
+          // reset file upload
           this.file = null
+          // let user know it could be a while
+          this.$buefy.dialog.prompt({
+            title: 'Upload Complete',
+            message: `Your Cisco Answers knowledge base file has been uploaded.
+            Please allow 24-48 hours for your file to be added to the demo
+            platform.`,
+            type: 'is-success',
+            rounded: true,
+            confirmText: 'OK'
+          })
         })
       }
       // make user confirm they want to upload the file
