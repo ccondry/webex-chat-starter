@@ -61,6 +61,8 @@ const actions = {
       // error
     } else {
       // success
+      // refresh kb display data
+      dispatch('getKnowledgeBase')
       // was it created or updated?
       if (response.status === 201) {
         // created - let user know it could be a while
