@@ -1,7 +1,7 @@
 {
   "name": "cloud-config-toolbox-ui",
   "description": "UI for the dCloud Cloud Configuration Toolbox",
-  "version": "2021.2.24",
+  "version": "2021.2.24-1",
   "author": "Coty Condry <ccondry@cisco.com>",
   "main": "dist/js/index.common.js",
   "unpkg": "dist/js/index.js",
