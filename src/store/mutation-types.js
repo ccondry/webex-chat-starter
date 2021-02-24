@@ -17,3 +17,6 @@ export const SET_USER = 'SET_USER'
 export const SET_VERTICALS = 'SET_VERTICALS'
 // dcloud session ID and datacenter
 export const SET_INSTANCE = 'SET_DCLOUD_SESSION'
+
+// cisco answers
+export const SET_KNOWLEDGE_BASE = 'SET_KNOWLEDGE_BASE'

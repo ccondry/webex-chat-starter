@@ -15,12 +15,10 @@
     </div>
     <div
     class="panel-block"
-    style="background-color: white;"
+    style="background-color: white; position: relative;"
     :style="!title.length ? 'border-radius: 6px;' : ''"
     >
-      <div class="content">
-        <slot />
-      </div>
+      <slot />
     </div>
   </b-collapse>
 </template>

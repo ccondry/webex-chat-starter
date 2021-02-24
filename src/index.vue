@@ -14,8 +14,11 @@
         <!-- welcome -->
         <welcome />
 
-        <!-- Cisco Answers KBs -->
-        <cisco-answers />
+        <!-- upload Cisco Answers KB -->
+        <upload-cisco-answers v-if="isLoggedIn" />
+
+        <!-- current Cisco Answers KB -->
+        <current-cisco-answers v-if="isLoggedIn" />
 
         <!-- Copyright and version footer -->
         <app-footer />
@@ -26,17 +29,19 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import navbar from './components/navbar'
-import welcome from './components/welcome'
-import ciscoAnswers from './components/cisco-answers'
-import appFooter from './components/app-footer'
+import Navbar from './components/navbar'
+import Welcome from './components/welcome'
+import UploadCiscoAnswers from './components/upload-cisco-answers'
+import CurrentCiscoAnswers from './components/current-cisco-answers'
+import AppFooter from './components/app-footer'
 
 export default {
   components: {
-    navbar,
-    welcome,
-    ciscoAnswers,
-    appFooter
+    Navbar,
+    Welcome,
+    UploadCiscoAnswers,
+    CurrentCiscoAnswers,
+    AppFooter
   },
 
   computed: {

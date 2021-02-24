@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <b-loading :active="isWorking" :is-full-page="false" />
+  <panel title="Upload Cisco Answers KB">
+    <b-loading :active="isLoading || isWorking" :is-full-page="false" />
     <b-field>
       <b-upload v-model="file"
       drag-drop
@@ -17,7 +17,7 @@
         </section>
       </b-upload>
     </b-field>
-  </section>
+  </panel>
 </template>
 
 <script>
@@ -33,10 +33,15 @@ export default {
   computed: {
     ...mapGetters([
       'loading',
-      'working'
+      'working',
+      'kb'
     ]),
+    isLoading () {
+      return this.loading.user.answers
+      // return true
+    },
     isWorking () {
-      return this.working.user.file
+      return this.working.user.answers
     }
   },
 
@@ -53,30 +58,20 @@ export default {
         this.uploadFile({
           name: this.file.name,
           data
-        }).then(response => {
+        }).then(() => {
           // reset file upload
           this.file = null
-          // check if response was error. show prompt on success.
-          if (response instanceof Error) {
-            return 
-          } else {
-            // let user know it could be a while
-            this.$buefy.dialog.alert({
-              title: 'Upload Complete',
-              message: `Your Cisco Answers knowledge base file has been uploaded.
-              Please allow 24-48 hours for your file to be added to the demo
-              platform.`,
-              type: 'is-success',
-              rounded: true,
-              confirmText: 'OK'
-            })
-          }
         })
+      }
+      let message = `Are you sure you want to upload <b>${this.file.name}</b> `
+      message += 'as a Cisco Answers knowledge base?'
+      if (this.kb && this.kb.data) {
+        message += ' This will <strong>overwrite</strong> your existing knowledge base.'
       }
       // make user confirm they want to upload the file
       this.$buefy.dialog.confirm({
         title: 'Confirm Upload',
-        message: `Are you sure you want to upload <b>${this.file.name}</b> as a Cisco Answers knowledge base?`,
+        message,
         type: 'is-success',
         rounded: true,
         confirmText: 'Upload',
