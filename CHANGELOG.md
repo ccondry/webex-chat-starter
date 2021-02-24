@@ -3,6 +3,13 @@
 Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
+# 2021.2.24
+
+### Features
+* **Cisco Answers:** Add display of user's existing Cisco Answers KB, and
+improve feedback when user uploads a replacement KB.
+
+
 # 2021.2.23
 
 ### Features
