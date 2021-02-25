@@ -17,7 +17,7 @@ const getters = {
       authVersion: authUrlBase + '/version',
       logout: authUrlBase + '/logout',
       user: authUrlBase + '/user',
-      answers: authUrlBase + '/answers/kb'
+      session: 'https://mm.cxdemo.net/api/v1/sessions'
     }
   }
 }

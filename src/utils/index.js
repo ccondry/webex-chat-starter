@@ -22,7 +22,9 @@ export const getUrlQueryParams = function () {
     const parts = pair.split('=')
     const key = decodeURIComponent(parts[0])
     const value = decodeURIComponent(parts[1])
-    query[key] = value
+    if (key && value !== undefined) {
+      query[key] = value
+    }
   }
   return query
 }

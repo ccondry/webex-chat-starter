@@ -1,5 +1,5 @@
 {
-  "name": "cloud-config-toolbox-ui",
+  "name": "webex-chat-starter",
   "description": "UI for the dCloud Cloud Configuration Toolbox",
   "version": "2021.2.25-1",
   "author": "Coty Condry <ccondry@cisco.com>",
@@ -29,10 +29,10 @@
   "homepage": "https://dcloud-collab-toolbox-rtp.cisco.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ccondry/cloud-config-toolbox-ui"
+    "url": "https://github.com/ccondry/webex-chat-starter"
   },
   "bugs": {
-    "url": "https://github.com/ccondry/cloud-config-toolbox-ui/issues"
+    "url": "https://github.com/ccondry/webex-chat-starter/issues"
   },
   "license": "MIT",
   "dependencies": {

@@ -19,4 +19,4 @@ export const SET_VERTICALS = 'SET_VERTICALS'
 export const SET_INSTANCE = 'SET_DCLOUD_SESSION'
 
 // agent answers
-export const SET_KNOWLEDGE_BASE = 'SET_KNOWLEDGE_BASE'
+export const SET_SESSION_INFO = 'SET_SESSION_INFO'

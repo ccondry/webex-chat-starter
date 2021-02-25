@@ -1,6 +1,6 @@
-# cloud-config-toolbox-ui
-The dCloud Colud Configuration web portal UI project. It is
-built on Vue.js 2.6 (including vue-router and vuex), using Webpack 4.
+# webex-chat-starter
+The dCloud Webex Contact Center v4 Instant Demo chat starter page.
+It is built on Vue.js 2.6 (including vue-router and vuex), using Webpack 4.
 
 ## Development
 ### Usage
@@ -20,4 +20,4 @@ opening your browser javascript console and entering `localStorage.jwt`.
 
 ## Production
 ### Installation
-`./install.sh` to build and install to the /var/www/html/static/cloud-config folder
+`./install.sh` to build and install to the /var/www/html/static/webex-chat-starter folder
