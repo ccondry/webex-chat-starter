@@ -1,7 +1,7 @@
 <template>
   <panel
-  title="Your Current Cisco Answers KB"
-  aria-id="current-cisco-answers-kb"
+  title="Your Current Agent Answers KB"
+  aria-id="current-agent-answers-kb"
   :has-refresh="true"
   >
     <b-table
@@ -35,10 +35,10 @@
         <section class="section">
           <div class="content has-text-grey has-text-centered">
             <p v-if="isLoading">
-              Checking for your Cisco Answers KB...
+              Checking for your Agent Answers KB...
             </p>
             <p v-else>
-              No Cisco Answers KB found for your user account.
+              No Agent Answers KB found for your user account.
             </p>
           </div>
         </section>

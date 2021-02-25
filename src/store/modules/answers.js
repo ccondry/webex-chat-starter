@@ -24,7 +24,7 @@ const actions = {
       group: 'user',
       type: 'answers',
       url: getters.endpoints.answers,
-      message: 'Get Cisco Answers knowledge base',
+      message: 'Get Agent Answers knowledge base',
       showNotification: false,
       mutation: types.SET_KNOWLEDGE_BASE
     })
@@ -34,7 +34,7 @@ const actions = {
       } else {
         // other error
         Toast.open({
-          message: 'Get Cisco Answers knowledge base failed: ' + response.message
+          message: 'Get Agent Answers knowledge base failed: ' + response.message
         })
       }
     } else {
@@ -53,7 +53,7 @@ const actions = {
           data: file.data
         }
       },
-      message: 'Upload Cisco Answers knowledge base',
+      message: 'Upload Agent Answers knowledge base',
       showNotification: false
     })
 
@@ -66,7 +66,7 @@ const actions = {
       // was it created or updated?
       if (response.status === 201) {
         // created - let user know it could be a while
-        let message = 'Your Cisco Answers knowledge base file has been '
+        let message = 'Your Agent Answers knowledge base file has been '
         message += 'uploaded. Please allow 24-48 hours for your file to be '
         message += 'added to the demo platform.'
         Dialog.alert({
@@ -79,7 +79,7 @@ const actions = {
       } else {
         // updated
         Toast.open({
-          message: 'Your Cisco Answers knowledge base has been updated successfully.',
+          message: 'Your Agent Answers knowledge base has been updated successfully.',
           duration: 5 * 1000
         })
       }

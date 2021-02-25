@@ -14,11 +14,11 @@
         <!-- welcome -->
         <welcome />
 
-        <!-- upload Cisco Answers KB -->
-        <upload-cisco-answers v-if="isLoggedIn" />
+        <!-- upload Agent Answers KB -->
+        <upload-agent-answers v-if="isLoggedIn" />
 
-        <!-- current Cisco Answers KB -->
-        <current-cisco-answers v-if="isLoggedIn" />
+        <!-- current Agent Answers KB -->
+        <current-agent-answers v-if="isLoggedIn" />
 
         <!-- Copyright and version footer -->
         <app-footer />
@@ -31,16 +31,16 @@
 import { mapActions, mapGetters } from 'vuex'
 import Navbar from './components/navbar'
 import Welcome from './components/welcome'
-import UploadCiscoAnswers from './components/upload-cisco-answers'
-import CurrentCiscoAnswers from './components/current-cisco-answers'
+import UploadAgentAnswers from './components/upload-agent-answers'
+import CurrentAgentAnswers from './components/current-agent-answers'
 import AppFooter from './components/app-footer'
 
 export default {
   components: {
     Navbar,
     Welcome,
-    UploadCiscoAnswers,
-    CurrentCiscoAnswers,
+    UploadAgentAnswers,
+    CurrentAgentAnswers,
     AppFooter
   },
 

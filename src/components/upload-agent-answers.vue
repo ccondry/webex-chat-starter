@@ -1,5 +1,5 @@
 <template>
-  <panel title="Upload Cisco Answers KB">
+  <panel title="Upload Agent Answers KB">
     <b-loading :active="isLoading || isWorking" :is-full-page="false" />
     <b-field>
       <b-upload v-model="file"
@@ -12,7 +12,7 @@
             <p>
               <b-icon icon="upload" size="is-large" />
             </p>
-            <p>Upload your Cisco Answers KB Base CSV file here</p>
+            <p>Upload your Agent Answers KB Base CSV file here</p>
           </div>
         </section>
       </b-upload>
@@ -64,7 +64,7 @@ export default {
         })
       }
       let message = `Are you sure you want to upload <b>${this.file.name}</b> `
-      message += 'as a Cisco Answers knowledge base?'
+      message += 'as a Agent Answers knowledge base?'
       if (this.kb && this.kb.data) {
         message += ' This will <strong>overwrite</strong> your existing knowledge base.'
       }
