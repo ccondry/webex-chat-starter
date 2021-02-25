@@ -20,4 +20,4 @@ opening your browser javascript console and entering `localStorage.jwt`.
 
 ## Production
 ### Installation
-`./install.sh` to build and install to the /var/www/toolbox/cloud-config folder
+`./install.sh` to build and install to the /var/www/html/static/cloud-config folder

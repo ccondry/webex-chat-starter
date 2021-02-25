@@ -1,8 +1,8 @@
 #!/bin/sh
-echo "removing cloud-config-toolbox-ui website files..."
-rm -rf /var/www/toolbox/cloud-config/*
+echo "removing webex-links-homepage website files..."
+rm -rf /var/www/html/static/webex/*
 if [ $? -eq 0 ]; then
-  echo "successfully removed cloud-config-toolbox-ui website files."
+  echo "successfully removed webex-links-homepage website files."
 else
-  echo "failed to remove cloud-config-toolbox-ui website files."
+  echo "failed to remove webex-links-homepage website files."
 fi
