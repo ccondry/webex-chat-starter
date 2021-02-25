@@ -10,8 +10,8 @@ if [ $? -eq 0 ]; then
     yarn build
   done
   echo "yarn build successful. copying dist files to www folder..."
-  mkdir -p /var/www/html/static/webex
-  cp -rf dist/* /var/www/html/static/webex/
+  mkdir -p /var/www/html/static/webex/v4prod
+  cp -rf dist/* /var/www/html/static/webex/v4prod/
   if [ $? -eq 0 ]; then
     echo "successfully installed webex-links-homepage website files"
   else
