@@ -28,6 +28,9 @@ export default {
       }, {
         text: 'Management Portal',
         href: 'https://portal.wxcc-us1.cisco.com'
+      }, {
+        text: 'Demo Website',
+        href: 'https://branding.dcloud.cisco.com/api/v1/brand'
       }]
     }
   }
