@@ -76,6 +76,8 @@ export default {
   mounted () {
     // copy URL query parameters to data
     this.query = getUrlQueryParams()
+    // set user ID, if available
+    this.userId = this.query.userId || ''
     this.checkUserId()
   },
 
